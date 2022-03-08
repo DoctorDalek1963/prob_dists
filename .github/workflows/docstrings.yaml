@@ -17,9 +17,10 @@ jobs:
       run: |
         pip install --upgrade pip
         pip install pydocstyle pytest -r requirements.txt
+        pip install pytest-custom_exit_code
 
     - name: Run pydocstyle
       run: pydocstyle src/ tests/
 
     - name: Run doctests
-      run: shopt -s globstar; pytest --doctest-modules src/prob_dists/**.py
+      run: shopt -s globstar; pytest --suppress-no-test-exit-code --doctest-modules src/prob_dists/**.py
