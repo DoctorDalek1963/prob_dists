@@ -77,7 +77,7 @@ autodoc_default_options = {
     'inherited-members': False,
     'show-inheritance': True,
     'ignore-module-all': False,
-    'exclude-members': '__module__, __weakref__, __dict__, __annotations__'
+    'exclude-members': '__module__, __weakref__, __dict__, __annotations__, __abstractmethods__'
 }
 
 autodoc_class_signature = 'separated'
