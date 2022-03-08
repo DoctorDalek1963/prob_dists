@@ -15,11 +15,3 @@
 This is the `prob_dists` Python package, which is designed to provide a way to easily find probabilities for various probability distributions.
 
 The Python source code can be found in `src/prob_dists/` and the full documentation can be found on [my GitHub pages site](https://doctordalek1963.github.io/prob_dists).
-
----
-
-## Usage
-
-Currently, this project is not feature complete. Don't use it yet. When this project is ready to be released
-and used by the public, it will have releases available in this repo's [releases](https://github.com/DoctorDalek1963/lintrans/releases)
-page.
