@@ -41,9 +41,9 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">prob_dists package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#module-prob_dists">Module contents</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#subpackages">Subpackages</a><ul class="simple">
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-prob_dists.distributions">prob_dists.distributions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-prob_dists.utility">prob_dists.utility module</a></li>
 </ul>
 </li>
 </ul>
@@ -77,10 +77,185 @@
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-prob_dists" title="Permalink to this headline"></a></h2>
 <p>This is the top-level <code class="docutils literal notranslate"><span class="pre">prob_dists</span></code> package, which contains all the subpackages of the project.</p>
 </section>
-<section id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline"></a></h2>
-<div class="toctree-wrapper compound">
-</div>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-prob_dists.distributions">
+<span id="prob-dists-distributions-module"></span><h2>prob_dists.distributions module<a class="headerlink" href="#module-prob_dists.distributions" title="Permalink to this headline"></a></h2>
+<p>This module contains classes for various probability distributions.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="prob_dists.distributions.NonsenseError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prob_dists.distributions.</span></span><span class="sig-name descname"><span class="pre">NonsenseError</span></span><a class="headerlink" href="#prob_dists.distributions.NonsenseError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<p>A simple error representing mathematical nonsense.</p>
+<p>This could be a probability that doesn’t make sense, or getting more successes than trials, etc.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="prob_dists.distributions.Distribution">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prob_dists.distributions.</span></span><span class="sig-name descname"><span class="pre">Distribution</span></span><a class="headerlink" href="#prob_dists.distributions.Distribution" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>This is an abstract superclass representing an arbitrary probability distribution.</p>
+<p>It has abstract methods which must be implemented by any concrete subclasses.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="prob_dists.distributions.Distribution.__init__">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prob_dists.distributions.Distribution.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Create a Distribution object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prob_dists.distributions.Distribution.__repr__">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#prob_dists.distributions.Distribution.__repr__" title="Permalink to this definition"></a></dt>
+<dd><p>Return a nice, readable repr of the Distribution.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prob_dists.distributions.Distribution.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#prob_dists.distributions.Distribution.__str__" title="Permalink to this definition"></a></dt>
+<dd><p>Return the repr by default.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prob_dists.distributions.Distribution.probability_mass_function">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">probability_mass_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#prob_dists.distributions.Distribution.probability_mass_function" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluate the PMF of this distribution.</p>
+<p>This is the probability that a random variable distributed by this
+distribution takes on the given value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The value to find the probability of</p></li>
+<li><p><strong>strict</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Whether to throw errors for invalid input, or return 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return float</dt>
+<dd class="field-even"><p>The calculated probability</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#prob_dists.distributions.NonsenseError" title="prob_dists.distributions.NonsenseError"><strong>NonsenseError</strong></a> – If the value doesn’t make sense in the context of the distribution</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prob_dists.distributions.Distribution.cumulative_distribution_function">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cumulative_distribution_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#prob_dists.distributions.Distribution.cumulative_distribution_function" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluate the CDF of this distribution.</p>
+<p>This is the probability that a random variable distributed by this
+distribution takes on a value less than or equal to the given value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The value to find the probability of</p></li>
+<li><p><strong>strict</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Whether to throw errors for invalid input, or return 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return float</dt>
+<dd class="field-even"><p>The calculated probability</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#prob_dists.distributions.NonsenseError" title="prob_dists.distributions.NonsenseError"><strong>NonsenseError</strong></a> – If the value doesn’t make sense in the context of the distribution</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="prob_dists.distributions.BinomialDistribution">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prob_dists.distributions.</span></span><span class="sig-name descname"><span class="pre">BinomialDistribution</span></span><a class="headerlink" href="#prob_dists.distributions.BinomialDistribution" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#prob_dists.distributions.Distribution" title="prob_dists.distributions.Distribution"><code class="xref py py-class docutils literal notranslate"><span class="pre">prob_dists.distributions.Distribution</span></code></a></p>
+<p>This is a binomial distribution, used to model multiple independent, binary trials.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="prob_dists.distributions.BinomialDistribution.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number_of_trials</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">probability</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prob_dists.distributions.BinomialDistribution.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Construct a binomial distribution from a given number of trials and probability of success.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prob_dists.distributions.BinomialDistribution.__repr__">
+<span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#prob_dists.distributions.BinomialDistribution.__repr__" title="Permalink to this definition"></a></dt>
+<dd><p>Return a nice repr of the distribution.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prob_dists.distributions.BinomialDistribution.probability_mass_function">
+<span class="sig-name descname"><span class="pre">probability_mass_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">successes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#prob_dists.distributions.BinomialDistribution.probability_mass_function" title="Permalink to this definition"></a></dt>
+<dd><p>Return the probability that we get a given number of successes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>successes</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of successes to find the probability of</p></li>
+<li><p><strong>strict</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Whether to throw errors for invalid input, or return 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return float</dt>
+<dd class="field-even"><p>The probability of getting exactly this many successes</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#prob_dists.distributions.NonsenseError" title="prob_dists.distributions.NonsenseError"><strong>NonsenseError</strong></a> – If the number of successes is more than the number of trials</p></li>
+<li><p><a class="reference internal" href="#prob_dists.distributions.NonsenseError" title="prob_dists.distributions.NonsenseError"><strong>NonsenseError</strong></a> – If the number of successes is not an integer</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prob_dists.distributions.BinomialDistribution.cumulative_distribution_function">
+<span class="sig-name descname"><span class="pre">cumulative_distribution_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">successes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#prob_dists.distributions.BinomialDistribution.cumulative_distribution_function" title="Permalink to this definition"></a></dt>
+<dd><p>Return the probability that we got less than or equal to the given number of successes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>successes</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of successes to find the probability of</p></li>
+<li><p><strong>strict</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Whether to throw errors for invalid input, or return 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return float</dt>
+<dd class="field-even"><p>The probability of getting exactly this many successes</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#prob_dists.distributions.NonsenseError" title="prob_dists.distributions.NonsenseError"><strong>NonsenseError</strong></a> – If the number of successes is more than the number of trials</p></li>
+<li><p><a class="reference internal" href="#prob_dists.distributions.NonsenseError" title="prob_dists.distributions.NonsenseError"><strong>NonsenseError</strong></a> – If the number of successes is not an integer</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-prob_dists.utility">
+<span id="prob-dists-utility-module"></span><h2>prob_dists.utility module<a class="headerlink" href="#module-prob_dists.utility" title="Permalink to this headline"></a></h2>
+<p>A simple utility module to provide helper functions for the maths.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="prob_dists.utility.factorial">
+<span class="sig-prename descclassname"><span class="pre">prob_dists.utility.</span></span><span class="sig-name descname"><span class="pre">factorial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#prob_dists.utility.factorial" title="Permalink to this definition"></a></dt>
+<dd><p>Return the factorial of <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="prob_dists.utility.choose">
+<span class="sig-prename descclassname"><span class="pre">prob_dists.utility.</span></span><span class="sig-name descname"><span class="pre">choose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#prob_dists.utility.choose" title="Permalink to this definition"></a></dt>
+<dd><p>Return the number of ways to choose <code class="docutils literal notranslate"><span class="pre">r</span></code> items from <code class="docutils literal notranslate"><span class="pre">n</span></code> elements.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of items to choose from</p></li>
+<li><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of items to be chosen</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return int</dt>
+<dd class="field-even"><p>The number of ways to choose <code class="docutils literal notranslate"><span class="pre">r</span></code> from <code class="docutils literal notranslate"><span class="pre">n</span></code></p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.10)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">&gt;</span> <span class="pre">n</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 </section>
 

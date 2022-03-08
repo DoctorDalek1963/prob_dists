@@ -6,8 +6,15 @@ Module contents
 
 .. automodule:: prob_dists
 
-Subpackages
------------
+Submodules
+----------
 
-.. toctree::
-   :maxdepth: 2
+prob\_dists.distributions module
+--------------------------------
+
+.. automodule:: prob_dists.distributions
+
+prob\_dists.utility module
+--------------------------
+
+.. automodule:: prob_dists.utility
