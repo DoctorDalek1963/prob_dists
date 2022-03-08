@@ -15,7 +15,7 @@ import prob_dists as pd
 
 
 def test_binomial_pmf() -> None:
-    """Test the binomial distribution probability mass function."""
+    """Test the binomial distribution PMF."""
     X = pd.B(20, 0.25)
     Y = pd.B(14, 0.36)
     Z = pd.B(50, 0.782)
@@ -67,3 +67,9 @@ def test_binomial_pmf() -> None:
 
     assert X.probability_mass_function(12.5, strict=False) == 0  # type: ignore[arg-type]
     assert X.probability_mass_function(22.3, strict=False) == 0  # type: ignore[arg-type]
+
+
+def test_binomial_cdf() -> None:
+    """Test the binomial distribution CDF."""
+    # TODO: Implement these tests
+    assert True
