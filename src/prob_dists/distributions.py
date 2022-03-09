@@ -6,6 +6,8 @@
 
 """This module contains classes for various probability distributions, and a convenience function."""
 
+from __future__ import annotations
+
 import abc
 from typing import Literal
 
