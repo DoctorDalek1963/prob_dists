@@ -7,6 +7,7 @@
 """A simple utility module to provide helper functions for the maths."""
 
 from functools import reduce
+from math import floor, log10
 from operator import mul
 
 
@@ -28,3 +29,9 @@ def choose(n: int, r: int) -> int:
         raise ValueError(f'Cannot choose {r} items from only {n} elements')
 
     return factorial(n) // (factorial(r) * factorial(n - r))
+
+
+def round_sig_fig(n: float, sig_fig: int) -> float:
+    """Round ``n`` to a given number of significant figures."""
+    # return round(n, -sig_fig * int(floor(log10(abs(n)))))
+    return n if n == 0 else round(n, -int(floor(log10(abs(n)))) + (sig_fig - 1))

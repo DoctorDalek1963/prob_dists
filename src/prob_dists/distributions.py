@@ -9,7 +9,7 @@
 import abc
 from typing import Literal
 
-from .utility import choose
+from .utility import choose, round_sig_fig
 
 
 class NonsenseError(Exception):
@@ -19,15 +19,35 @@ class NonsenseError(Exception):
     """
 
 
+class _Bounds:
+    """This is a simple little class to hold bounds for a distribution."""
+
+    def __init__(self):
+        """Create a :class:`_Bounds` object with default bounds."""
+        self.lower: tuple[int | None, bool] = (None, False)
+        self.upper: tuple[int | None, bool] = (None, False)
+
+    def __repr__(self) -> str:
+        """Return a simple repr of the object."""
+        return f'{self.__class__.__module__}.{self.__class__.__name__}({self.lower}, {self.upper})'
+
+
 class Distribution(metaclass=abc.ABCMeta):
     """This is an abstract superclass representing an arbitrary probability distribution.
 
     It has abstract methods which must be implemented by any concrete subclasses.
     """
 
-    @abc.abstractmethod
     def __init__(self, *args, **kwargs):
         """Create a Distribution object."""
+        # This tuple represents the lower and upper bounds of the distribution
+        # The bool is whether the number itself should be included in the calculation
+        self._bounds = _Bounds()
+        self._accepts_floats: bool = False
+
+    def reset_bounds(self) -> None:
+        """Reset the bounds of the distribution."""
+        self._bounds = _Bounds()
 
     @abc.abstractmethod
     def __repr__(self) -> str:
@@ -36,6 +56,70 @@ class Distribution(metaclass=abc.ABCMeta):
     def __str__(self) -> str:
         """Return the repr by default."""
         return repr(self)
+
+    def __eq__(self, other):
+        """Set the upper and lower bounds to ``other``."""
+        if isinstance(other, int) or (self._accepts_floats and isinstance(other, float)):
+            self._bounds.upper = (other, True)
+            self._bounds.lower = (other, True)
+            return self
+
+        return NotImplemented
+
+    def __lt__(self, other):
+        """Set the upper bound accordingly."""
+        if isinstance(other, int) or (self._accepts_floats and isinstance(other, float)):
+            self._bounds.upper = (other, False)
+            return self
+
+        return NotImplemented
+
+    def __le__(self, other):
+        """Set the upper bound accordingly."""
+        if isinstance(other, int) or (self._accepts_floats and isinstance(other, float)):
+            self._bounds.upper = (other, True)
+            return self
+
+        return NotImplemented
+
+    def __gt__(self, other):
+        """Set the lower bound accordingly."""
+        if isinstance(other, int) or (self._accepts_floats and isinstance(other, float)):
+            self._bounds.lower = (other, False)
+            return self
+
+        return NotImplemented
+
+    def __ge__(self, other):
+        """Set the lower bound accordingly."""
+        if isinstance(other, int) or (self._accepts_floats and isinstance(other, float)):
+            self._bounds.lower = (other, True)
+            return self
+
+        return NotImplemented
+
+    def calculate(self, *, strict: bool = True) -> float:
+        """Return the probability of a random variable distributed like this taking on a value within its bounds."""
+        lower = self._bounds.lower
+        upper = self._bounds.upper
+
+        # TODO: Check for nonsense
+
+        probability = 1.0
+
+        if upper[0] is not None:
+            probability = self.cdf(upper[0], strict=strict)
+
+            if not upper[1]:
+                probability -= self.pmf(upper[0], strict=strict)
+
+        if lower[0] is not None:
+            probability -= self.cdf(lower[0], strict=strict)
+
+            if lower[1]:
+                probability += self.pmf(lower[0], strict=strict)
+
+        return round_sig_fig(probability, 10)
 
     @abc.abstractmethod
     def pmf(self, value: int, *, strict: bool = True) -> float:
@@ -73,6 +157,10 @@ class BinomialDistribution(Distribution):
         """Construct a binomial distribution from a given number of trials and probability of success."""
         if not 0 <= probability <= 1:
             raise NonsenseError('Binomial probability must be between 0 and 1')
+
+        super().__init__()
+
+        self._accepts_floats = False
 
         self._number_of_trials = number_of_trials
         self._probability = probability
@@ -143,3 +231,19 @@ class BinomialDistribution(Distribution):
         # mypy expects this sum to have ints for some reason, so we ignore it
         return 0 if self._check_nonsense(successes, strict) is not None else \
             sum(self.pmf(x) for x in range(successes + 1))  # type: ignore[misc]
+
+
+def calculate_probability(distribution: Distribution) -> float:
+    """Return the calculated probability of a random variable for this distribution getting within its bounds.
+
+    This function gets exported as ``P`` by ``__init__.py``, which lets the user do things like:
+    >>> from prob_dists import P, B
+    >>> X = B(20, 0.5)
+    >>> P(X > 6)
+    0.9423408508
+    >>> P(4 < X <= 12)
+    0.8625030518
+    """
+    probability = distribution.calculate(strict=True)
+    distribution.reset_bounds()
+    return probability

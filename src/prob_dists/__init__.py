@@ -7,10 +7,11 @@
 """This is the top-level ``prob_dists`` package, which contains all the subpackages of the project."""
 
 from . import distributions
-from .distributions import NonsenseError
+from .distributions import calculate_probability, NonsenseError
 
+P = calculate_probability
 B = distributions.BinomialDistribution
 
-__all__ = ['B', 'distributions', 'NonsenseError']
+__all__ = ['P', 'B', 'distributions', 'NonsenseError']
 
 __version__ = '0.0.1-alpha'
