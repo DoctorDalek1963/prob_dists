@@ -161,5 +161,14 @@ def test_binomial_calculate() -> None:
     with pytest.raises(pd.NonsenseError):
         P(4 > X >= 12)
 
-    # with pytest.raises(pd.NonsenseError):
-    #     P(10 < X == 3)
+    with pytest.raises(pd.NonsenseError):
+        P(10 < X == 3)
+
+    with pytest.raises(pd.NonsenseError):
+        P(3 == X > 10)
+
+    with pytest.raises(pd.NonsenseError):
+        P(X == 3 > 10)
+
+    with pytest.raises(pd.NonsenseError):
+        P(X == 3 < 10)

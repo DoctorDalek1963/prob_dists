@@ -31,6 +31,13 @@ class _Bounds:
         """Return a simple repr of the object."""
         return f'{self.__class__.__module__}.{self.__class__.__name__}({self.lower}, {self.upper})'
 
+    def __eq__(self, other):
+        """Check equality."""
+        if not isinstance(other, _Bounds):
+            return NotImplemented
+
+        return self.lower == other.lower and self.upper == other.upper
+
 
 class Distribution(metaclass=abc.ABCMeta):
     """This is an abstract superclass representing an arbitrary probability distribution.
@@ -60,6 +67,10 @@ class Distribution(metaclass=abc.ABCMeta):
     def __eq__(self, other):
         """Set the upper and lower bounds to ``other``."""
         if isinstance(other, int) or (self._accepts_floats and isinstance(other, float)):
+            # If the bounds are already mutated, then we've mixed inequality and equality
+            if self._bounds != _Bounds():
+                raise NonsenseError('Cannot have inequality and equality mixed together')
+
             self._bounds.upper = (other, True)
             self._bounds.lower = (other, True)
             return self
