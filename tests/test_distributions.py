@@ -71,5 +71,54 @@ def test_binomial_pmf() -> None:
 
 def test_binomial_cdf() -> None:
     """Test the binomial distribution CDF."""
-    # TODO: Implement these tests
-    assert True
+    X = pd.B(20, 0.25)
+    Y = pd.B(14, 0.36)
+    Z = pd.B(50, 0.782)
+
+    assert X.cumulative_distribution_function(0) == approx(3.1712119939e-3)
+    assert X.cumulative_distribution_function(1) == approx(0.02431262487)
+    assert X.cumulative_distribution_function(2) == approx(0.09126043246)
+    assert X.cumulative_distribution_function(3) == approx(0.2251560477)
+    assert X.cumulative_distribution_function(4) == approx(0.4148415008)
+    assert X.cumulative_distribution_function(5) == approx(0.6171726621)
+    assert X.cumulative_distribution_function(6) == approx(0.7857819481)
+    assert X.cumulative_distribution_function(7) == approx(0.8981881431)
+    assert X.cumulative_distribution_function(8) == approx(0.9590748321)
+    assert X.cumulative_distribution_function(9) == approx(0.986135583)
+    assert X.cumulative_distribution_function(10) == approx(0.9960578583)
+    assert X.cumulative_distribution_function(11) == approx(0.9990646084)
+    assert X.cumulative_distribution_function(12) == approx(0.9998162959)
+    assert X.cumulative_distribution_function(13) == approx(0.9999704883)
+    assert X.cumulative_distribution_function(14) == approx(0.999996187)
+    assert X.cumulative_distribution_function(15) == approx(0.9999996135)
+    assert X.cumulative_distribution_function(16) == approx(0.9999999704)
+    assert X.cumulative_distribution_function(17) == approx(0.9999999984)
+    assert X.cumulative_distribution_function(18) == approx(0.9999999999)
+    assert X.cumulative_distribution_function(19) == approx(1.0)
+    assert X.cumulative_distribution_function(20) == 1.0
+
+    assert Y.cumulative_distribution_function(4) == approx(0.3920114632)
+    assert Y.cumulative_distribution_function(8) == approx(0.970579751)
+    assert Y.cumulative_distribution_function(13) == approx(0.9999993859)
+
+    assert Z.cumulative_distribution_function(12) == approx(5.041928974e-16)
+    assert Z.cumulative_distribution_function(21) == approx(3.112911755e-8)
+    assert Z.cumulative_distribution_function(36) == approx(0.1846045478)
+    assert Z.cumulative_distribution_function(45) == approx(0.9911912197)
+
+    with pytest.raises(pd.NonsenseError):
+        X.cumulative_distribution_function(-1, strict=True)
+        X.cumulative_distribution_function(-3, strict=True)
+        X.cumulative_distribution_function(21, strict=True)
+        X.cumulative_distribution_function(30, strict=True)
+
+        X.cumulative_distribution_function(12.5, strict=True)  # type: ignore[arg-type]
+        X.cumulative_distribution_function(22.3, strict=True)  # type: ignore[arg-type]
+
+    assert X.cumulative_distribution_function(-1, strict=False) == 0
+    assert X.cumulative_distribution_function(-3, strict=False) == 0
+    assert X.cumulative_distribution_function(21, strict=False) == 0
+    assert X.cumulative_distribution_function(30, strict=False) == 0
+
+    assert X.cumulative_distribution_function(12.5, strict=False) == 0  # type: ignore[arg-type]
+    assert X.cumulative_distribution_function(22.3, strict=False) == 0  # type: ignore[arg-type]
