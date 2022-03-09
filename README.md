@@ -12,6 +12,8 @@
 
 ---
 
-This is the `prob_dists` Python package, which is designed to provide a way to easily find probabilities for various probability distributions.
+This is the `prob_dists` Python package, which is designed to provide a way to easily
+calculate probabilities for random variables distributed by various probability distributions.
 
-The Python source code can be found in `src/prob_dists/` and the full documentation can be found on [my GitHub pages site](https://doctordalek1963.github.io/prob_dists).
+The Python source code can be found in `src/prob_dists/` and the full documentation can be
+found on [my GitHub pages site](https://doctordalek1963.github.io/prob_dists).
