@@ -28,4 +28,4 @@ B = distributions.BinomialDistribution
 
 __all__ = ['P', 'B', 'distributions', 'NonsenseError']
 
-__version__ = '0.1.1'
+__version__ = '0.1.2'
