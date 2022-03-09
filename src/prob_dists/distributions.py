@@ -117,6 +117,9 @@ class Distribution(metaclass=abc.ABCMeta):
             if lower[1]:
                 probability += self.pmf(lower[0], strict=strict)
 
+        if probability < 0:
+            raise NonsenseError('This inequality doesn\'t make sense')
+
         return round_sig_fig(probability, 10)
 
     @abc.abstractmethod
