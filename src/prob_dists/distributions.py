@@ -66,48 +66,48 @@ class Distribution(metaclass=abc.ABCMeta):
 
     def __eq__(self, other):
         """Set the upper and lower bounds to ``other``."""
-        if isinstance(other, int) or (self._accepts_floats and isinstance(other, float)):
-            # If the bounds are already mutated, then we've mixed inequality and equality
-            if self._bounds != _Bounds():
-                raise NonsenseError('Cannot have inequality and equality mixed together')
+        if not (isinstance(other, int) or (self._accepts_floats and isinstance(other, float))):
+            return NotImplemented
 
-            self._bounds.upper = (other, True)
-            self._bounds.lower = (other, True)
-            return self
+        # If the bounds are already mutated, then we've mixed inequality and equality
+        if self._bounds != _Bounds():
+            raise NonsenseError('Cannot have inequality and equality mixed together')
 
-        return NotImplemented
+        self._bounds.upper = (other, True)
+        self._bounds.lower = (other, True)
+        return self
 
     def __lt__(self, other):
         """Set the upper bound accordingly."""
-        if isinstance(other, int) or (self._accepts_floats and isinstance(other, float)):
-            self._bounds.upper = (other, False)
-            return self
+        if not (isinstance(other, int) or (self._accepts_floats and isinstance(other, float))):
+            return NotImplemented
 
-        return NotImplemented
+        self._bounds.upper = (other, False)
+        return self
 
     def __le__(self, other):
         """Set the upper bound accordingly."""
-        if isinstance(other, int) or (self._accepts_floats and isinstance(other, float)):
-            self._bounds.upper = (other, True)
-            return self
+        if not (isinstance(other, int) or (self._accepts_floats and isinstance(other, float))):
+            return NotImplemented
 
-        return NotImplemented
+        self._bounds.upper = (other, True)
+        return self
 
     def __gt__(self, other):
         """Set the lower bound accordingly."""
-        if isinstance(other, int) or (self._accepts_floats and isinstance(other, float)):
-            self._bounds.lower = (other, False)
-            return self
+        if not (isinstance(other, int) or (self._accepts_floats and isinstance(other, float))):
+            return NotImplemented
 
-        return NotImplemented
+        self._bounds.lower = (other, False)
+        return self
 
     def __ge__(self, other):
         """Set the lower bound accordingly."""
-        if isinstance(other, int) or (self._accepts_floats and isinstance(other, float)):
-            self._bounds.lower = (other, True)
-            return self
+        if not (isinstance(other, int) or (self._accepts_floats and isinstance(other, float))):
+            return NotImplemented
 
-        return NotImplemented
+        self._bounds.lower = (other, True)
+        return self
 
     def calculate(self, *, strict: bool = True) -> float:
         """Return the probability of a random variable distributed like this taking on a value within its bounds."""
