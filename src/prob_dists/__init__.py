@@ -14,4 +14,4 @@ B = distributions.BinomialDistribution
 
 __all__ = ['P', 'B', 'distributions', 'NonsenseError']
 
-__version__ = '0.0.1-alpha'
+__version__ = '0.1.0'
