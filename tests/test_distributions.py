@@ -12,13 +12,14 @@ import pytest
 from pytest import approx
 
 import prob_dists as pd
+from prob_dists import P, B
 
 
 def test_binomial_pmf() -> None:
     """Test the binomial distribution PMF."""
-    X = pd.B(20, 0.25)
-    Y = pd.B(14, 0.36)
-    Z = pd.B(50, 0.782)
+    X = B(20, 0.25)
+    Y = B(14, 0.36)
+    Z = B(50, 0.782)
 
     assert X.pmf(0) == approx(3.171211939e-3)
     assert X.pmf(1) == approx(0.02114141293)
@@ -71,9 +72,9 @@ def test_binomial_pmf() -> None:
 
 def test_binomial_cdf() -> None:
     """Test the binomial distribution CDF."""
-    X = pd.B(20, 0.25)
-    Y = pd.B(14, 0.36)
-    Z = pd.B(50, 0.782)
+    X = B(20, 0.25)
+    Y = B(14, 0.36)
+    Z = B(50, 0.782)
 
     assert X.cdf(0) == approx(3.1712119939e-3)
     assert X.cdf(1) == approx(0.02431262487)
@@ -122,3 +123,43 @@ def test_binomial_cdf() -> None:
 
     assert X.cdf(12.5, strict=False) == 0  # type: ignore[arg-type]
     assert X.cdf(22.3, strict=False) == 0  # type: ignore[arg-type]
+
+
+def test_binomial_calculate() -> None:
+    """Test the use of P() to calculate probabilities of a binomial distribution."""
+    X = B(20, 0.25)
+    Y = B(14, 0.36)
+    Z = B(50, 0.782)
+
+    assert P(X == 2) == approx(X.pmf(2))
+    assert P(X == 12) == approx(X.pmf(12))
+    assert P(X < 2) == approx(sum(X.pmf(x) for x in (0, 1)))
+    assert P(2 > X) == approx(sum(X.pmf(x) for x in (0, 1)))
+    assert P(X < 10) == approx(sum(X.pmf(x) for x in range(10)))
+    assert P(X <= 10) == approx(sum(X.pmf(x) for x in range(11)))
+    assert P(3 < X <= 12) == approx(sum(X.pmf(x) for x in range(4, 13)))
+    assert P(20 >= X) == 1
+    assert P(X <= 20) == 1
+    assert P(0 <= X <= 20) == 1
+    assert P(7 <= X < 15) == approx(sum(X.pmf(x) for x in range(7, 15)))
+    assert P(3 < X < 10) == approx(sum(X.pmf(x) for x in range(4, 10)))
+
+    assert P(Y == 10) == approx(Y.pmf(10))
+    assert P(Y < 10) == approx(sum(Y.pmf(x) for x in range(10)))
+    assert P(Y > 10) == approx(sum(Y.pmf(x) for x in range(11, 15)))
+    assert P(Y < 10) + P(Y > 10) == approx(1 - P(Y == 10))
+    assert P(Y <= 4) == approx(Y.cdf(4))
+
+    assert P(Z == 27) == approx(Z.pmf(27))
+    assert P(Z <= 30) == approx(Z.cdf(30))
+    assert P(Z > 30) == approx(1 - Z.cdf(30))
+    assert P(Z >= 20) == approx(1 - Z.cdf(19))
+
+    with pytest.raises(pd.NonsenseError):
+        P(10 < X < 8)
+
+    with pytest.raises(pd.NonsenseError):
+        P(4 > X >= 12)
+
+    # with pytest.raises(pd.NonsenseError):
+    #     P(10 < X == 3)
