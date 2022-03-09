@@ -38,7 +38,7 @@ class Distribution(metaclass=abc.ABCMeta):
         return repr(self)
 
     @abc.abstractmethod
-    def probability_mass_function(self, value: int, *, strict: bool = True) -> float:
+    def pmf(self, value: int, *, strict: bool = True) -> float:
         """Evaluate the PMF of this distribution.
 
         This is the probability that a random variable distributed by this
@@ -52,7 +52,7 @@ class Distribution(metaclass=abc.ABCMeta):
         """
 
     @abc.abstractmethod
-    def cumulative_distribution_function(self, value: int, *, strict: bool = True) -> float:
+    def cdf(self, value: int, *, strict: bool = True) -> float:
         """Evaluate the CDF of this distribution.
 
         This is the probability that a random variable distributed by this
@@ -116,7 +116,7 @@ class BinomialDistribution(Distribution):
 
         return None
 
-    def probability_mass_function(self, successes: int, *, strict: bool = True) -> float:
+    def pmf(self, successes: int, *, strict: bool = True) -> float:
         """Return the probability that we get a given number of successes.
 
         :param int successes: The number of successes to find the probability of
@@ -130,7 +130,7 @@ class BinomialDistribution(Distribution):
             self._choose(successes) * (self._probability ** successes) * \
             ((1 - self._probability) ** (self._number_of_trials - successes))
 
-    def cumulative_distribution_function(self, successes: int, *, strict: bool = True) -> float:
+    def cdf(self, successes: int, *, strict: bool = True) -> float:
         """Return the probability that we got less than or equal to the given number of successes.
 
         :param int successes: The number of successes to find the probability of
@@ -142,4 +142,4 @@ class BinomialDistribution(Distribution):
         """
         # mypy expects this sum to have ints for some reason, so we ignore it
         return 0 if self._check_nonsense(successes, strict) is not None else \
-            sum(self.probability_mass_function(x) for x in range(successes + 1))  # type: ignore[misc]
+            sum(self.pmf(x) for x in range(successes + 1))  # type: ignore[misc]
