@@ -4,7 +4,7 @@
 # This program is licensed under GNU GPLv3, available here:
 # <https://www.gnu.org/licenses/gpl-3.0.html>
 
-"""A simple utility module to provide helper functions for the maths."""
+"""A simple utility module to just provide helper functions for the maths."""
 
 from functools import reduce
 from math import floor, log10
@@ -17,11 +17,12 @@ def factorial(n: int) -> int:
 
 
 def choose(n: int, r: int) -> int:
-    """Return the number of ways to choose ``r`` items from ``n`` elements.
+    """Return the number of ways to choose ``r`` items from ``n`` elements, often
+    written as :math:`\\binom{n}{r}` or :math:`^nC_r`.
 
     :param int n: The number of items to choose from
     :param int r: The number of items to be chosen
-    :return int: The number of ways to choose ``r`` from ``n``
+    :returns int: The number of ways to choose ``r`` from ``n``
 
     :raises ValueError: If ``r > n``
     """
@@ -32,6 +33,22 @@ def choose(n: int, r: int) -> int:
 
 
 def round_sig_fig(n: float, sig_fig: int) -> float:
-    """Round ``n`` to a given number of significant figures."""
+    """Round ``n`` to a given number of significant figures.
+
+    :Example:
+
+    >>> round_sig_fig(0.123456789, 3)
+    0.123
+    >>> round_sig_fig(0.123456789, 6)
+    0.123457
+    >>> round_sig_fig(0.123456789, 9)
+    0.123456789
+    >>> round_sig_fig(0.0000123456789, 3)
+    1.23e-05
+
+    :param float n: The number to round
+    :param int sig_fig: The number of significant figures to round to
+    :returns float: The rounded number
+    """
     # This code was taken from a comment on this SO answer: https://stackoverflow.com/a/3411435/12985838
     return n if n == 0 else round(n, -int(floor(log10(abs(n)))) + (sig_fig - 1))
