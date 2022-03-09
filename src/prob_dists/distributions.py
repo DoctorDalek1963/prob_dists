@@ -249,6 +249,9 @@ def calculate_probability(distribution: Distribution) -> float:
     """Return the calculated probability of a random variable for this distribution getting within its bounds.
 
     This function gets exported as ``P`` by ``__init__.py``, which lets the user do things like:
+
+    :Example:
+
     >>> from prob_dists import P, B
     >>> X = B(20, 0.5)
     >>> P(X > 6)
