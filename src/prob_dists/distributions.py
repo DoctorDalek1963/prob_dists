@@ -24,11 +24,11 @@ class Bounds:
 
     lower: tuple[int | None, bool]
     """The lower of the two bounds.
-    
+
     The first element of the tuple is the value of the bound itself. None means the
     natural bound of the distribution. This can be 0, negative infinity, or something
     else depending on the distribution.
-    
+
     The second element of the tuple is whether the value bound of the should be included
     in probability calculations or not.
     """
@@ -81,9 +81,9 @@ class Distribution(abc.ABC):
 
     accepts_floats: bool
     """This attribute is a flag for whether this distribution accepts floats, or only accepts ints.
-    
+
     If it accepts floats, then it is continuous, if it doesn't, then it's discrete.
-    
+
     .. note::
        All logical comparison dunder methods implemented here check against this flag and return
        ``NotImplemented`` if the user tries to compare a discrete distribution with a float.
