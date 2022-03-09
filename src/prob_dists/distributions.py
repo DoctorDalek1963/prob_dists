@@ -103,8 +103,6 @@ class Distribution(metaclass=abc.ABCMeta):
         lower = self._bounds.lower
         upper = self._bounds.upper
 
-        # TODO: Check for nonsense
-
         probability = 1.0
 
         if upper[0] is not None:
