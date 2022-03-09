@@ -276,9 +276,9 @@ class BinomialDistribution(Distribution):
         return None
 
     def pmf(self, successes: int, *, strict: bool = True) -> float:
-        """Return the probability that we get a given number of successes.
+        r"""Return the probability that we get a given number of successes.
 
-        This method uses the formula :math:`\\binom{n}{r} p^r q^{n - r}` where
+        This method uses the formula :math:`\binom{n}{r} p^r q^{n - r}` where
         :math:`n` is the number of trials, :math:`r` is the number of successes,
         :math:`p` is the probability of each success, and :math:`q = 1 - p`.
 

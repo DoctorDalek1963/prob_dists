@@ -17,8 +17,9 @@ def factorial(n: int) -> int:
 
 
 def choose(n: int, r: int) -> int:
-    """Return the number of ways to choose ``r`` items from ``n`` elements, often
-    written as :math:`\\binom{n}{r}` or :math:`^nC_r`.
+    r"""Return the number of ways to choose ``r`` items from ``n`` elements.
+
+    This is often written as :math:`\binom{n}{r}` or :math:`^nC_r`.
 
     :param int n: The number of items to choose from
     :param int r: The number of items to be chosen
