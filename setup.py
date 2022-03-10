@@ -31,6 +31,9 @@ The full docs are available [here](https://doctordalek1963.github.io/probcalc).
 
 ## Changelog
 
+### v0.2.3
+- Fix bug in automated tests
+
 ### v0.2.2
 - Add changelog
 
