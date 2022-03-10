@@ -1,4 +1,4 @@
-# prob_dists - Calculate probabilities for distributions
+# probcalc - Calculate probabilities for distributions
 # Copyright (C) 2022 D. Dyson (DoctorDalek1963)
 
 # This program is licensed under GNU GPLv3, available here:

@@ -1,12 +1,12 @@
-# prob_dists - Calculate probabilities for distributions
+# probcalc - Calculate probabilities for distributions
 # Copyright (C) 2022 D. Dyson (DoctorDalek1963)
 
 # This program is licensed under GNU GPLv3, available here:
 # <https://www.gnu.org/licenses/gpl-3.0.html>
 
-"""This is the top-level ``prob_dists`` package, which contains all the subpackages and submodules of the project.
+"""This is the top-level ``probcalc`` package, which contains all the subpackages and submodules of the project.
 
-Here's a table of user-friendly alises and the backend classes they refer to:
+Here's a table of user-friendly aliases and the backend classes they refer to:
 
 .. list-table::
    :widths: 20 70
@@ -15,11 +15,11 @@ Here's a table of user-friendly alises and the backend classes they refer to:
    * - Alias
      - Class or function name
    * - P
-     - :func:`prob_dists.distributions.calculate_probability`
+     - :func:`probcalc.distributions.calculate_probability`
    * - B
-     - :class:`prob_dists.distributions.BinomialDistribution`
+     - :class:`probcalc.distributions.BinomialDistribution`
    * - Po
-     - :class:`prob_dists.distributions.PoissonDistribution`
+     - :class:`probcalc.distributions.PoissonDistribution`
 """
 
 from . import distributions, utility

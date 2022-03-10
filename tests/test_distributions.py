@@ -1,18 +1,18 @@
-# prob_dists - Calculate probabilities for distributions
+# probcalc - Calculate probabilities for distributions
 # Copyright (C) 2022 D. Dyson (DoctorDalek1963)
 
 # This program is licensed under GNU GPLv3, available here:
 # <https://www.gnu.org/licenses/gpl-3.0.html>
 
-"""A simple test module to test the :mod:`prob_dists.distributions` module.
+"""A simple test module to test the :mod:`probcalc.distributions` module.
 
 All test values calculated with Casio fx-991ES.
 """
 import pytest
 from pytest import approx
 
-import prob_dists as pd
-from prob_dists import P, B, Po
+import probcalc as pd
+from probcalc import P, B, Po
 
 
 def test_binomial_pmf() -> None:

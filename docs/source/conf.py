@@ -14,19 +14,19 @@ from __future__ import annotations
 
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../../src/prob_dists'))
+sys.path.insert(0, os.path.abspath('../../src/probcalc'))
 
-import prob_dists
+import probcalc
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'prob_dists'
+project = 'probcalc'
 author = 'D. Dyson (DoctorDalek1963)'
 copyright = f'2022, {author}'
 
 # The full version, including alpha/beta/rc tags
-release = prob_dists.__version__
+release = probcalc.__version__
 
 
 # -- General configuration ---------------------------------------------------

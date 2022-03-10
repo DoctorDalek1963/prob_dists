@@ -30,7 +30,7 @@ jobs:
     - name: Create pylint import graphs
       run: |
         shopt -s globstar
-        pylint --rcfile=/dev/null --exit-zero --reports=y --disable=all --enable=imports,RP0402 --int-import-graph=docs/source/int-imports.png src/prob_dists/**/*.py
+        pylint --rcfile=/dev/null --exit-zero --reports=y --disable=all --enable=imports,RP0402 --int-import-graph=docs/source/int-imports.png src/probcalc/**/*.py
 
     - name: Build docs
       run: cd docs/ && make html && cd ..

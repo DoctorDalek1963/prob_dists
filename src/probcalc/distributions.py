@@ -1,4 +1,4 @@
-# prob_dists - Calculate probabilities for distributions
+# probcalc - Calculate probabilities for distributions
 # Copyright (C) 2022 D. Dyson (DoctorDalek1963)
 
 # This program is licensed under GNU GPLv3, available here:
@@ -244,7 +244,7 @@ class BinomialDistribution(Distribution):
         return f'B({self._number_of_trials}, {self._probability})'
 
     def _choose(self, r: int) -> int:
-        """Call :meth:`prob_dists.utility.choose` with the instance number of trials and the provided value."""
+        """Call :meth:`probcalc.utility.choose` with the instance number of trials and the provided value."""
         return choose(self._number_of_trials, r)
 
     def check_nonsense(self, successes: int, *, strict: bool) -> Literal[None, -1]:
@@ -402,7 +402,7 @@ def calculate_probability(distribution: Distribution) -> float:
 
     :Example:
 
-    >>> from prob_dists import P, B
+    >>> from probcalc import P, B
     >>> X = B(20, 0.5)
     >>> P(X > 6)
     0.9423408508
