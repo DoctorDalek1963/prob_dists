@@ -95,6 +95,9 @@
 <tr class="row-odd"><td><p>B</p></td>
 <td><p><a class="reference internal" href="#prob_dists.distributions.BinomialDistribution" title="prob_dists.distributions.BinomialDistribution"><code class="xref py py-class docutils literal notranslate"><span class="pre">prob_dists.distributions.BinomialDistribution</span></code></a></p></td>
 </tr>
+<tr class="row-even"><td><p>Po</p></td>
+<td><p><a class="reference internal" href="#prob_dists.distributions.PoissonDistribution" title="prob_dists.distributions.PoissonDistribution"><code class="xref py py-class docutils literal notranslate"><span class="pre">prob_dists.distributions.PoissonDistribution</span></code></a></p></td>
+</tr>
 </tbody>
 </table>
 </section>
@@ -336,7 +339,7 @@ distribution takes on a value less than or equal to the given value.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="prob_dists.distributions.BinomialDistribution.check_nonsense">
-<span class="sig-name descname"><span class="pre">check_nonsense</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">successes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Literal[None,</span> <span class="pre">-1]</span></span></span><a class="headerlink" href="#prob_dists.distributions.BinomialDistribution.check_nonsense" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">check_nonsense</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">successes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Literal[None,</span> <span class="pre">-1]</span></span></span><a class="headerlink" href="#prob_dists.distributions.BinomialDistribution.check_nonsense" title="Permalink to this definition"></a></dt>
 <dd><p>Check if the given number of successes is nonsense.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -405,6 +408,101 @@ distribution takes on a value less than or equal to the given value.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><a class="reference internal" href="#prob_dists.distributions.NonsenseError" title="prob_dists.distributions.NonsenseError"><strong>NonsenseError</strong></a> – If the number of successes is outside the valid range</p></li>
 <li><p><a class="reference internal" href="#prob_dists.distributions.NonsenseError" title="prob_dists.distributions.NonsenseError"><strong>NonsenseError</strong></a> – If the number of successes is not an integer</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="prob_dists.distributions.PoissonDistribution">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prob_dists.distributions.</span></span><span class="sig-name descname"><span class="pre">PoissonDistribution</span></span><a class="headerlink" href="#prob_dists.distributions.PoissonDistribution" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#prob_dists.distributions.Distribution" title="prob_dists.distributions.Distribution"><code class="xref py py-class docutils literal notranslate"><span class="pre">prob_dists.distributions.Distribution</span></code></a></p>
+<p>This is a Poisson distribution, used to model independent events that happen at a constant average rate.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="prob_dists.distributions.PoissonDistribution.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prob_dists.distributions.PoissonDistribution.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Construct a Poisson distribution with the given average rate of event occurrence.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prob_dists.distributions.PoissonDistribution.__repr__">
+<span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#prob_dists.distributions.PoissonDistribution.__repr__" title="Permalink to this definition"></a></dt>
+<dd><p>Return a nice repr of the distribution.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prob_dists.distributions.PoissonDistribution.check_nonsense">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_nonsense</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Literal[None,</span> <span class="pre">-1]</span></span></span><a class="headerlink" href="#prob_dists.distributions.PoissonDistribution.check_nonsense" title="Permalink to this definition"></a></dt>
+<dd><p>Check if the given number of event occurrences is nonsense.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>number</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of occurrences to check</p></li>
+<li><p><strong>strict</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Whether to throw errors or just return -1</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None on success, -1 on fail</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Literal[None, -1]</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#prob_dists.distributions.NonsenseError" title="prob_dists.distributions.NonsenseError"><strong>NonsenseError</strong></a> – If the number is negative</p></li>
+<li><p><a class="reference internal" href="#prob_dists.distributions.NonsenseError" title="prob_dists.distributions.NonsenseError"><strong>NonsenseError</strong></a> – If the number is not an integer</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prob_dists.distributions.PoissonDistribution.pmf">
+<span class="sig-name descname"><span class="pre">pmf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#prob_dists.distributions.PoissonDistribution.pmf" title="Permalink to this definition"></a></dt>
+<dd><p>Return the probability that we get a given number of occurrences.</p>
+<p>This method uses the formula <span class="math notranslate nohighlight">\(\frac{e^{-\lambda} \lambda^x}{x!}\)</span>,
+where <span class="math notranslate nohighlight">\(x\)</span> is the number of occurrences and <span class="math notranslate nohighlight">\(\lambda\)</span> is the
+rate of the distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>number</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of occurrences to find the probability of</p></li>
+<li><p><strong>strict</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Whether to throw errors for invalid input, or return 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns float</dt>
+<dd class="field-even"><p>The probability of getting exactly this many occurrences</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#prob_dists.distributions.NonsenseError" title="prob_dists.distributions.NonsenseError"><strong>NonsenseError</strong></a> – If the number of occurrences is negative</p></li>
+<li><p><a class="reference internal" href="#prob_dists.distributions.NonsenseError" title="prob_dists.distributions.NonsenseError"><strong>NonsenseError</strong></a> – If the number of occurrences is not an integer</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prob_dists.distributions.PoissonDistribution.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#prob_dists.distributions.PoissonDistribution.cdf" title="Permalink to this definition"></a></dt>
+<dd><p>Return the probability that we get less than or equal to the given number of occurrences.</p>
+<p>This method just sums <a class="reference internal" href="#prob_dists.distributions.PoissonDistribution.pmf" title="prob_dists.distributions.PoissonDistribution.pmf"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pmf()</span></code></a> from 0 to the given number of occurrences.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>number</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of occurrences to find the probability for</p></li>
+<li><p><strong>strict</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Whether to throw errors for invalid input, or return 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns float</dt>
+<dd class="field-even"><p>The probability of getting exactly this many occurrences</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#prob_dists.distributions.NonsenseError" title="prob_dists.distributions.NonsenseError"><strong>NonsenseError</strong></a> – If the number of occurrences is negative</p></li>
+<li><p><a class="reference internal" href="#prob_dists.distributions.NonsenseError" title="prob_dists.distributions.NonsenseError"><strong>NonsenseError</strong></a> – If the number of occurrences is not an integer</p></li>
 </ul>
 </dd>
 </dl>
