@@ -31,4 +31,4 @@ Po = distributions.PoissonDistribution
 
 __all__ = ['P', 'B', 'Po', 'NonsenseError', 'distributions', 'utility']
 
-__version__ = '0.2.1'
+__version__ = '0.2.2'

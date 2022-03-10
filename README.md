@@ -17,3 +17,6 @@ calculate probabilities for random variables distributed by various probability 
 
 The Python source code can be found in `src/probcalc/` and the full documentation can be
 found on [my GitHub pages site](https://doctordalek1963.github.io/probcalc).
+
+This project is also available [on PyPI](https://pypi.org/project/probcalc/) and can
+be installed simply with `pip install probcalc`.

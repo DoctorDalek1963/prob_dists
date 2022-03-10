@@ -26,6 +26,30 @@ Or, let's say there's a call center that gets an average of 5 calls every minute
 ```
 
 This project will implement more distributions in the future, and they will all be able to be used like this.
+
+The full docs are available [here](https://doctordalek1963.github.io/probcalc).
+
+## Changelog
+
+### v0.2.2
+- Add changelog
+
+### v0.2.1
+- Set up PyPI stuff and GitHub Action for PyPI
+
+### v0.2.0
+- Add Poisson distribution
+
+### v0.1.2
+- Fix minor issues
+
+### v0.1.1
+- Improve documentation and add alias table
+
+### 0.1.0
+- Initial version
+- Add Binomial distribution
+- Add P() syntax
 '''
 
     setup(
