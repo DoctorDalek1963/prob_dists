@@ -317,6 +317,7 @@ class PoissonDistribution(Distribution):
     """This is a Poisson distribution, used to model independent events that happen at a constant average rate."""
 
     def __init__(self, rate: float):
+        """Construct a Poisson distribution with the given average rate of event occurrence."""
         if rate < 0:
             raise NonsenseError(f'Cannot have negative rate in Poisson distribution ({rate})')
 
@@ -325,6 +326,7 @@ class PoissonDistribution(Distribution):
         self._rate = rate
 
     def __repr__(self) -> str:
+        """Return a nice repr of the distribution."""
         return f'Po({self._rate})'
 
     @staticmethod
@@ -367,7 +369,7 @@ class PoissonDistribution(Distribution):
         :raises NonsenseError: If the number of occurrences is negative
         :raises NonsenseError: If the number of occurrences is not an integer
         """
-        return (math.e ** -self._rate * self._rate ** number) / factorial(number)
+        return float((math.e ** -self._rate * self._rate ** number) / factorial(number))
 
     def cdf(self, number: int, *, strict: bool = True) -> float:
         """Return the probability that we get less than or equal to the given number of occurrences.
@@ -382,7 +384,7 @@ class PoissonDistribution(Distribution):
         :raises NonsenseError: If the number of occurrences is not an integer
         """
         return 0 if self.check_nonsense(number, strict=strict) is not None else \
-            sum(self.pmf(x) for x in range(number + 1))
+            sum(self.pmf(x) for x in range(number + 1))  # type: ignore[misc]
 
 
 def calculate_probability(distribution: Distribution) -> float:
