@@ -369,7 +369,8 @@ class PoissonDistribution(Distribution):
         :raises NonsenseError: If the number of occurrences is negative
         :raises NonsenseError: If the number of occurrences is not an integer
         """
-        return float((math.e ** -self._rate * self._rate ** number) / factorial(number))
+        return 0 if self.check_nonsense(number, strict=strict) else \
+            float((math.e ** -self._rate * self._rate ** number) / factorial(number))
 
     def cdf(self, number: int, *, strict: bool = True) -> float:
         """Return the probability that we get less than or equal to the given number of occurrences.
