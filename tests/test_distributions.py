@@ -258,3 +258,54 @@ def test_poisson_cdf() -> None:
 
     with pytest.raises(pd.NonsenseError):
         X.cdf(2.3)  # type: ignore[arg-type]
+
+
+def test_poisson_calculate() -> None:
+    """Test the use of P() to calculate probabilities of a poisson distribution."""
+    X = Po(2)
+    Y = Po(12.3)
+    Z = Po(8.362)
+
+    # This is a carbon copy of the binomial version of this test but I'm lazy
+    # I can't factor this out easily because the distributions are slightly different
+    assert P(X == 2) == approx(X.pmf(2))
+    assert P(X == 12) == approx(X.pmf(12))
+    assert P(X < 2) == approx(sum(X.pmf(x) for x in (0, 1)))
+    assert P(2 > X) == approx(sum(X.pmf(x) for x in (0, 1)))
+    assert P(X < 10) == approx(sum(X.pmf(x) for x in range(10)))
+    assert P(X <= 10) == approx(sum(X.pmf(x) for x in range(11)))
+    assert P(3 < X <= 12) == approx(sum(X.pmf(x) for x in range(4, 13)))
+    assert P(20 >= X) == 1
+    assert P(X <= 20) == 1
+    assert P(0 <= X <= 20) == 1
+    assert P(7 <= X < 15) == approx(sum(X.pmf(x) for x in range(7, 15)))
+    assert P(3 < X < 10) == approx(sum(X.pmf(x) for x in range(4, 10)))
+
+    assert P(Y == 10) == approx(Y.pmf(10))
+    assert P(Y < 10) == approx(sum(Y.pmf(x) for x in range(10)))
+    assert P(Y > 10) == approx(1 - sum(Y.pmf(x) for x in range(11)))  # type: ignore[misc]
+    assert P(Y < 10) + P(Y > 10) == approx(1 - P(Y == 10))
+    assert P(Y <= 4) == approx(Y.cdf(4))
+
+    assert P(Z == 27) == approx(Z.pmf(27))
+    assert P(Z <= 30) == approx(Z.cdf(30))
+    assert P(Z > 30) == approx(1 - Z.cdf(30))
+    assert P(Z >= 20) == approx(1 - Z.cdf(19))
+
+    with pytest.raises(pd.NonsenseError):
+        P(10 < X < 8)
+
+    with pytest.raises(pd.NonsenseError):
+        P(4 > X >= 12)
+
+    with pytest.raises(pd.NonsenseError):
+        P(10 < X == 3)
+
+    with pytest.raises(pd.NonsenseError):
+        P(3 == X > 10)
+
+    with pytest.raises(pd.NonsenseError):
+        P(X == 3 > 10)
+
+    with pytest.raises(pd.NonsenseError):
+        P(X == 3 < 10)
