@@ -9,9 +9,10 @@
 from __future__ import annotations
 
 import abc
+import math
 from typing import Literal
 
-from .utility import choose, round_sig_fig
+from .utility import choose, factorial, round_sig_fig
 
 
 class NonsenseError(Exception):
@@ -231,7 +232,7 @@ class BinomialDistribution(Distribution):
     def __init__(self, number_of_trials: int, probability: float):
         """Construct a binomial distribution from a given number of trials and probability of success for each trial."""
         if not 0 <= probability <= 1:
-            raise NonsenseError('Binomial probability must be between 0 and 1')
+            raise NonsenseError(f'Binomial probability must be between 0 and 1, not {probability}')
 
         super().__init__(accepts_floats=False)
 
@@ -246,7 +247,7 @@ class BinomialDistribution(Distribution):
         """Call :meth:`prob_dists.utility.choose` with the instance number of trials and the provided value."""
         return choose(self._number_of_trials, r)
 
-    def check_nonsense(self, successes: int, strict: bool) -> Literal[None, -1]:
+    def check_nonsense(self, successes: int, *, strict: bool) -> Literal[None, -1]:
         """Check if the given number of successes is nonsense.
 
         :param int successes: The number of successes to check
@@ -291,7 +292,7 @@ class BinomialDistribution(Distribution):
         :raises NonsenseError: If the number of successes is outside the valid range
         :raises NonsenseError: If the number of successes is not an integer
         """
-        return 0 if self.check_nonsense(successes, strict) is not None else \
+        return 0 if self.check_nonsense(successes, strict=strict) is not None else \
             self._choose(successes) * (self._probability ** successes) * \
             ((1 - self._probability) ** (self._number_of_trials - successes))
 
@@ -308,8 +309,80 @@ class BinomialDistribution(Distribution):
         :raises NonsenseError: If the number of successes is not an integer
         """
         # mypy expects this sum to have ints for some reason, so we ignore it
-        return 0 if self.check_nonsense(successes, strict) is not None else \
+        return 0 if self.check_nonsense(successes, strict=strict) is not None else \
             sum(self.pmf(x) for x in range(successes + 1))  # type: ignore[misc]
+
+
+class PoissonDistribution(Distribution):
+    """This is a Poisson distribution, used to model independent events that happen at a constant average rate."""
+
+    def __init__(self, rate: float):
+        if rate < 0:
+            raise NonsenseError(f'Cannot have negative rate in Poisson distribution ({rate})')
+
+        super().__init__(accepts_floats=False)
+
+        self._rate = rate
+
+    def __repr__(self) -> str:
+        return f'Po({self._rate})'
+
+    @staticmethod
+    def check_nonsense(number: int, *, strict: bool = True) -> Literal[None, -1]:
+        """Check if the given number of event occurrences is nonsense.
+
+        :param int number: The number of occurrences to check
+        :param bool strict: Whether to throw errors or just return -1
+        :returns: None on success, -1 on fail
+        :rtype: Literal[None, -1]
+
+        :raises NonsenseError: If the number is negative
+        :raises NonsenseError: If the number is not an integer
+        """
+        if number < 0:
+            if strict:
+                raise NonsenseError(f'Cannot have negative number of event occurrences ({number})')
+
+            return -1
+
+        if number != int(number):
+            if strict:
+                raise NonsenseError(f'Number of occurrences must be an integer, not {number}')
+
+            return -1
+
+        return None
+
+    def pmf(self, number: int, *, strict: bool = True) -> float:
+        r"""Return the probability that we get a given number of occurrences.
+
+        This method uses the formula :math:`\frac{e^{-\lambda} \lambda^x}{x!}`,
+        where :math:`x` is the number of occurrences and :math:`\lambda` is the
+        rate of the distribution.
+
+        :param int number: The number of occurrences to find the probability of
+        :param bool strict: Whether to throw errors for invalid input, or return 0
+        :returns float: The probability of getting exactly this many occurrences
+
+        :raises NonsenseError: If the number of occurrences is negative
+        :raises NonsenseError: If the number of occurrences is not an integer
+        """
+        return (math.e ** -self._rate * self._rate ** number) / factorial(number)
+
+    def cdf(self, number: int, *, strict: bool = True) -> float:
+        """Return the probability that we get less than or equal to the given number of occurrences.
+
+        This method just sums :meth:`pmf` from 0 to the given number of occurrences.
+
+        :param int number: The number of occurrences to find the probability for
+        :param bool strict: Whether to throw errors for invalid input, or return 0
+        :returns float: The probability of getting exactly this many occurrences
+
+        :raises NonsenseError: If the number of occurrences is negative
+        :raises NonsenseError: If the number of occurrences is not an integer
+        """
+        return 0 if self.check_nonsense(number, strict=strict) is not None else \
+            sum(self.pmf(x) for x in range(number + 1))
 
 
 def calculate_probability(distribution: Distribution) -> float:

@@ -18,14 +18,17 @@ Here's a table of user-friendly alises and the backend classes they refer to:
      - :func:`prob_dists.distributions.calculate_probability`
    * - B
      - :class:`prob_dists.distributions.BinomialDistribution`
+   * - Po
+     - :class:`prob_dists.distributions.PoissonDistribution`
 """
 
-from . import distributions
-from .distributions import calculate_probability, NonsenseError
+from . import distributions, utility
+from .distributions import NonsenseError
 
-P = calculate_probability
+P = distributions.calculate_probability
 B = distributions.BinomialDistribution
+Po = distributions.PoissonDistribution
 
-__all__ = ['P', 'B', 'distributions', 'NonsenseError']
+__all__ = ['P', 'B', 'Po', 'NonsenseError', 'distributions', 'utility']
 
 __version__ = '0.1.2'
