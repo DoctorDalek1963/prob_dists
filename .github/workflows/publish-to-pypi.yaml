@@ -1,6 +1,11 @@
 name: Publish to PyPI
 
-on: push
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+    tags-ignore:
+      - 'v*.*.*-alpha'
 
 jobs:
   check:
