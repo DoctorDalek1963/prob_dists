@@ -57,7 +57,7 @@ jobs:
       - name: Test
         run: |
           pytest
-          shopt -s globstar; pytest --suppress-no-test-exit-code --doctest-modules src/probcalc/**.py
+          pytest --suppress-no-test-exit-code --doctest-modules src/
 
   publish:
     needs: test

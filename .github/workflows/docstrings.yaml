@@ -23,4 +23,4 @@ jobs:
       run: pydocstyle src/ tests/
 
     - name: Run doctests
-      run: shopt -s globstar; pytest --suppress-no-test-exit-code --doctest-modules src/probcalc/**.py
+      run: pytest --suppress-no-test-exit-code --doctest-modules src/
