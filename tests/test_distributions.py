@@ -207,6 +207,15 @@ def test_poisson_pmf() -> None:
     assert Z.pmf(10) == approx(0.1075890671)
     assert Z.pmf(20) == approx(2.682305189e-4)
 
+    with pytest.raises(pd.NonsenseError):
+        X.pmf(-1)
+
+    with pytest.raises(pd.NonsenseError):
+        X.pmf(2.3)  # type: ignore[arg-type]
+
+    with pytest.raises(pd.NonsenseError):
+        X.pmf(2.3)  # type: ignore[arg-type]
+
 
 def test_poisson_cdf() -> None:
     """Test the Poisson distribution CDF."""
@@ -240,3 +249,12 @@ def test_poisson_cdf() -> None:
     assert Z.cdf(5) == approx(0.1602777547)
     assert Z.cdf(10) == approx(0.7784049707)
     assert Z.cdf(20) == approx(0.999830179)
+
+    with pytest.raises(pd.NonsenseError):
+        X.cdf(-1)
+
+    with pytest.raises(pd.NonsenseError):
+        X.cdf(2.3)  # type: ignore[arg-type]
+
+    with pytest.raises(pd.NonsenseError):
+        X.cdf(2.3)  # type: ignore[arg-type]
