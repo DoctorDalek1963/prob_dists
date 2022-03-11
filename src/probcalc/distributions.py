@@ -429,8 +429,8 @@ class ProbabilityCalculator:
         This function is just a convenient wrapper around :meth:`Distribution.calculate`.
 
         .. note::
-           This function calls :meth:`Distribution.reset_bounds`, but the
-           class method doesn't on its own. Using the class method multiple times with different inputs can
+           This function calls :meth:`Distribution.reset`, but :meth:`Distribution.calculate`
+           doesn't on its own. Using the class method multiple times with different inputs can
            result in undefined behaviour. Use this wrapper for all interactive use.
 
         This function gets exported as ``P`` by ``__init__.py``, which lets the user do things like:
