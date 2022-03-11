@@ -17,10 +17,9 @@ jobs:
       run: |
         pip install --upgrade pip
         pip install pydocstyle pytest -r requirements.txt
-        pip install pytest-custom_exit_code
 
     - name: Run pydocstyle
       run: pydocstyle src/ tests/
 
     - name: Run doctests
-      run: pytest --suppress-no-test-exit-code --doctest-modules src/
+      run: pytest --doctest-modules src/
