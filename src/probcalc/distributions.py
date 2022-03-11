@@ -388,32 +388,39 @@ class PoissonDistribution(Distribution):
             sum(self.pmf(x) for x in range(number + 1))  # type: ignore[misc]
 
 
-def calculate_probability(distribution: Distribution) -> float:
-    """Return the probability of a random variable from this distribution taking on a value within its bounds.
+class ProbabilityCalculator:
+    """This class only exists to give the probability calculator a nice repr."""
 
-    This function is just a convenient wrapper around :meth:`Distribution.calculate`.
+    def __repr__(self) -> str:
+        """Return a very simple repr of the calculator."""
+        return 'P'
 
-    .. note::
-       This function calls :meth:`Distribution.reset_bounds`, but the
-       class method doesn't on its own. Using the class method multiple times with different inputs can
-       result in undefined behaviour. Use this function for all interactive use.
+    def __call__(self, distribution: Distribution) -> float:
+        """Return the probability of a random variable from this distribution taking on a value within its bounds.
 
-    This function gets exported as ``P`` by ``__init__.py``, which lets the user do things like:
+        This function is just a convenient wrapper around :meth:`Distribution.calculate`.
 
-    :Example:
+        .. note::
+           This function calls :meth:`Distribution.reset_bounds`, but the
+           class method doesn't on its own. Using the class method multiple times with different inputs can
+           result in undefined behaviour. Use this wrapper for all interactive use.
 
-    >>> from probcalc import P, B
-    >>> X = B(20, 0.5)
-    >>> P(X > 6)
-    0.9423408508
-    >>> P(4 < X <= 12)
-    0.8625030518
+        This function gets exported as ``P`` by ``__init__.py``, which lets the user do things like:
 
-    :param Distribution distribution: The probability distribution that we're using to calculate the value
-    :returns float: The calculated probability
+        :Example:
 
-    :raises NonsenseError: If the bounds of the distribution are invalid
-    """
-    probability = distribution.calculate(strict=True)
-    distribution.reset_bounds()
-    return probability
+        >>> from probcalc import P, B
+        >>> X = B(20, 0.5)
+        >>> P(X > 6)
+        0.9423408508
+        >>> P(4 < X <= 12)
+        0.8625030518
+
+        :param Distribution distribution: The probability distribution that we're using to calculate the value
+        :returns float: The calculated probability
+
+        :raises NonsenseError: If the bounds of the distribution are invalid
+        """
+        probability = distribution.calculate(strict=True)
+        distribution.reset_bounds()
+        return probability
