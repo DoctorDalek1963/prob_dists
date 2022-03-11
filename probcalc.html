@@ -90,7 +90,7 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p>P</p></td>
-<td><p><a class="reference internal" href="#probcalc.distributions.calculate_probability" title="probcalc.distributions.calculate_probability"><code class="xref py py-func docutils literal notranslate"><span class="pre">probcalc.distributions.calculate_probability()</span></code></a></p></td>
+<td><p><a class="reference internal" href="#probcalc.distributions.ProbabilityCalculator" title="probcalc.distributions.ProbabilityCalculator"><code class="xref py py-class docutils literal notranslate"><span class="pre">probcalc.distributions.ProbabilityCalculator</span></code></a></p></td>
 </tr>
 <tr class="row-odd"><td><p>B</p></td>
 <td><p><a class="reference internal" href="#probcalc.distributions.BinomialDistribution" title="probcalc.distributions.BinomialDistribution"><code class="xref py py-class docutils literal notranslate"><span class="pre">probcalc.distributions.BinomialDistribution</span></code></a></p></td>
@@ -175,7 +175,7 @@ To check against that, though, we need to be able to check <a class="reference i
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
 <p>This is an abstract superclass representing an arbitrary probability distribution.</p>
 <p>It implements logical comparison dunder methods and <a class="reference internal" href="#probcalc.distributions.Distribution.calculate" title="probcalc.distributions.Distribution.calculate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">calculate()</span></code></a>, which allow
-it to be used easily in <a class="reference internal" href="#probcalc.distributions.calculate_probability" title="probcalc.distributions.calculate_probability"><code class="xref py py-func docutils literal notranslate"><span class="pre">calculate_probability()</span></code></a>.</p>
+it to be used easily in <code class="xref py py-func docutils literal notranslate"><span class="pre">calculate_probability()</span></code>.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="probcalc.distributions.Distribution.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accepts_floats</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#probcalc.distributions.Distribution.__init__" title="Permalink to this definition"></a></dt>
@@ -199,10 +199,16 @@ it to be used easily in <a class="reference internal" href="#probcalc.distributi
 </div>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="probcalc.distributions.Distribution.negate_probability">
+<span class="sig-name descname"><span class="pre">negate_probability</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></em><a class="headerlink" href="#probcalc.distributions.Distribution.negate_probability" title="Permalink to this definition"></a></dt>
+<dd><p>This attribute is a flag set by <a class="reference internal" href="#probcalc.distributions.Distribution.__ne__" title="probcalc.distributions.Distribution.__ne__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__ne__()</span></code></a> and used by <a class="reference internal" href="#probcalc.distributions.Distribution.calculate" title="probcalc.distributions.Distribution.calculate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">calculate()</span></code></a> for the <code class="docutils literal notranslate"><span class="pre">!=</span></code> operator.</p>
+</dd></dl>
+
 <dl class="py method">
-<dt class="sig sig-object py" id="probcalc.distributions.Distribution.reset_bounds">
-<span class="sig-name descname"><span class="pre">reset_bounds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#probcalc.distributions.Distribution.reset_bounds" title="Permalink to this definition"></a></dt>
-<dd><p>Reset the bounds of the distribution to be the default, natural bounds (None).</p>
+<dt class="sig sig-object py" id="probcalc.distributions.Distribution.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#probcalc.distributions.Distribution.reset" title="Permalink to this definition"></a></dt>
+<dd><p>Reset the bounds of the distribution to be the default, and reset <a class="reference internal" href="#probcalc.distributions.Distribution.negate_probability" title="probcalc.distributions.Distribution.negate_probability"><code class="xref py py-attr docutils literal notranslate"><span class="pre">negate_probability</span></code></a> flag.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -218,6 +224,18 @@ it to be used easily in <a class="reference internal" href="#probcalc.distributi
 <p>This method checks the bounds against the defaults to see if the user has
 previously compared this distribution with an inequality operator. If they
 have, then we raise an error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#probcalc.distributions.NonsenseError" title="probcalc.distributions.NonsenseError"><strong>NonsenseError</strong></a> – If the user has tried to mix inequality and equality comparison</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="probcalc.distributions.Distribution.__ne__">
+<span class="sig-name descname"><span class="pre">__ne__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#probcalc.distributions.Distribution.__ne__" title="Permalink to this definition"></a></dt>
+<dd><p>Set the upper and lower bounds to <code class="docutils literal notranslate"><span class="pre">other</span></code>, if possible, and set <a class="reference internal" href="#probcalc.distributions.Distribution.negate_probability" title="probcalc.distributions.Distribution.negate_probability"><code class="xref py py-attr docutils literal notranslate"><span class="pre">negate_probability</span></code></a>.</p>
+<p>See <a class="reference internal" href="#probcalc.distributions.Distribution.__eq__" title="probcalc.distributions.Distribution.__eq__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__eq__()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Raises</dt>
 <dd class="field-odd"><p><a class="reference internal" href="#probcalc.distributions.NonsenseError" title="probcalc.distributions.NonsenseError"><strong>NonsenseError</strong></a> – If the user has tried to mix inequality and equality comparison</p>
@@ -262,7 +280,7 @@ have, then we raise an error.</p>
 <p>This method should only really be used in scripts and things, because it can easily
 result in undefined behaviour when the <a class="reference internal" href="#probcalc.distributions.Distribution" title="probcalc.distributions.Distribution"><code class="xref py py-class docutils literal notranslate"><span class="pre">Distribution</span></code></a> object is mutated
 between calls, which is often done with logical comparison operators.</p>
-<p>If you want a good way to calculate probability interactively, see <a class="reference internal" href="#probcalc.distributions.calculate_probability" title="probcalc.distributions.calculate_probability"><code class="xref py py-func docutils literal notranslate"><span class="pre">calculate_probability()</span></code></a>.</p>
+<p>If you want a good way to calculate probability interactively, see <code class="xref py py-func docutils literal notranslate"><span class="pre">calculate_probability()</span></code>.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -510,16 +528,27 @@ rate of the distribution.</p>
 
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="probcalc.distributions.calculate_probability">
-<span class="sig-prename descclassname"><span class="pre">probcalc.distributions.</span></span><span class="sig-name descname"><span class="pre">calculate_probability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distribution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#probcalc.distributions.Distribution" title="probcalc.distributions.Distribution"><span class="pre">probcalc.distributions.Distribution</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#probcalc.distributions.calculate_probability" title="Permalink to this definition"></a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="probcalc.distributions.ProbabilityCalculator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">probcalc.distributions.</span></span><span class="sig-name descname"><span class="pre">ProbabilityCalculator</span></span><a class="headerlink" href="#probcalc.distributions.ProbabilityCalculator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>This class only exists to give the probability calculator a nice repr.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="probcalc.distributions.ProbabilityCalculator.__repr__">
+<span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#probcalc.distributions.ProbabilityCalculator.__repr__" title="Permalink to this definition"></a></dt>
+<dd><p>Return a very simple repr of the calculator.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="probcalc.distributions.ProbabilityCalculator.__call__">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distribution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#probcalc.distributions.Distribution" title="probcalc.distributions.Distribution"><span class="pre">probcalc.distributions.Distribution</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#probcalc.distributions.ProbabilityCalculator.__call__" title="Permalink to this definition"></a></dt>
 <dd><p>Return the probability of a random variable from this distribution taking on a value within its bounds.</p>
 <p>This function is just a convenient wrapper around <a class="reference internal" href="#probcalc.distributions.Distribution.calculate" title="probcalc.distributions.Distribution.calculate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Distribution.calculate()</span></code></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This function calls <a class="reference internal" href="#probcalc.distributions.Distribution.reset_bounds" title="probcalc.distributions.Distribution.reset_bounds"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Distribution.reset_bounds()</span></code></a>, but the
+<p>This function calls <code class="xref py py-meth docutils literal notranslate"><span class="pre">Distribution.reset_bounds()</span></code>, but the
 class method doesn’t on its own. Using the class method multiple times with different inputs can
-result in undefined behaviour. Use this function for all interactive use.</p>
+result in undefined behaviour. Use this wrapper for all interactive use.</p>
 </div>
 <p>This function gets exported as <code class="docutils literal notranslate"><span class="pre">P</span></code> by <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code>, which lets the user do things like:</p>
 <dl class="field-list simple">
@@ -545,6 +574,8 @@ result in undefined behaviour. Use this function for all interactive use.</p>
 <dd class="field-odd"><p><a class="reference internal" href="#probcalc.distributions.NonsenseError" title="probcalc.distributions.NonsenseError"><strong>NonsenseError</strong></a> – If the bounds of the distribution are invalid</p>
 </dd>
 </dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
