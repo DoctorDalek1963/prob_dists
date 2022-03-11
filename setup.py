@@ -31,6 +31,10 @@ The full docs are available [here](https://doctordalek1963.github.io/probcalc).
 
 ## Changelog
 
+### v0.2.5
+- Add nice repr for probability calculator
+- Implement `!=` functionality
+
 ### v0.2.4
 - Fix mistake in publish workflow
 
