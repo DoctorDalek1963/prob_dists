@@ -133,6 +133,8 @@ def test_binomial_calculate() -> None:
 
     assert P(X == 2) == approx(X.pmf(2))
     assert P(X == 12) == approx(X.pmf(12))
+    assert P(X != 4) == approx(1 - X.pmf(4))
+    assert P(X != 17) == approx(1 - X.pmf(17))
     assert P(X < 2) == approx(sum(X.pmf(x) for x in (0, 1)))
     assert P(2 > X) == approx(sum(X.pmf(x) for x in (0, 1)))
     assert P(X < 10) == approx(sum(X.pmf(x) for x in range(10)))
@@ -145,12 +147,14 @@ def test_binomial_calculate() -> None:
     assert P(3 < X < 10) == approx(sum(X.pmf(x) for x in range(4, 10)))
 
     assert P(Y == 10) == approx(Y.pmf(10))
+    assert P(Y != 6) == approx(1 - Y.pmf(6))
     assert P(Y < 10) == approx(sum(Y.pmf(x) for x in range(10)))
     assert P(Y > 10) == approx(sum(Y.pmf(x) for x in range(11, 15)))
     assert P(Y < 10) + P(Y > 10) == approx(1 - P(Y == 10))
     assert P(Y <= 4) == approx(Y.cdf(4))
 
     assert P(Z == 27) == approx(Z.pmf(27))
+    assert P(Z != 33) == approx(1 - Z.pmf(33))
     assert P(Z <= 30) == approx(Z.cdf(30))
     assert P(Z > 30) == approx(1 - Z.cdf(30))
     assert P(Z >= 20) == approx(1 - Z.cdf(19))
@@ -270,6 +274,8 @@ def test_poisson_calculate() -> None:
     # I can't factor this out easily because the distributions are slightly different
     assert P(X == 2) == approx(X.pmf(2))
     assert P(X == 12) == approx(X.pmf(12))
+    assert P(X != 4) == approx(1 - X.pmf(4))
+    assert P(X != 17) == approx(1 - X.pmf(17))
     assert P(X < 2) == approx(sum(X.pmf(x) for x in (0, 1)))
     assert P(2 > X) == approx(sum(X.pmf(x) for x in (0, 1)))
     assert P(X < 10) == approx(sum(X.pmf(x) for x in range(10)))
@@ -282,12 +288,14 @@ def test_poisson_calculate() -> None:
     assert P(3 < X < 10) == approx(sum(X.pmf(x) for x in range(4, 10)))
 
     assert P(Y == 10) == approx(Y.pmf(10))
+    assert P(Y != 6) == approx(1 - Y.pmf(6))
     assert P(Y < 10) == approx(sum(Y.pmf(x) for x in range(10)))
     assert P(Y > 10) == approx(1 - sum(Y.pmf(x) for x in range(11)))  # type: ignore[misc]
     assert P(Y < 10) + P(Y > 10) == approx(1 - P(Y == 10))
     assert P(Y <= 4) == approx(Y.cdf(4))
 
     assert P(Z == 27) == approx(Z.pmf(27))
+    assert P(Z != 33) == approx(1 - Z.pmf(33))
     assert P(Z <= 30) == approx(Z.cdf(30))
     assert P(Z > 30) == approx(1 - Z.cdf(30))
     assert P(Z >= 20) == approx(1 - Z.cdf(19))

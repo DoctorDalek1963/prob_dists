@@ -92,6 +92,9 @@ class Distribution(abc.ABC):
        ``NotImplemented`` if the user tries to compare a discrete distribution with a float.
     """
 
+    negate_probability: bool
+    """This attribute is a flag set by :meth:`__ne__` and used by :meth:`calculate` for the ``!=`` operator."""
+
     def __init__(self, *, accepts_floats: bool):
         """Create a :class:`Distribution` object with natural bounds and one flag.
 
@@ -99,10 +102,12 @@ class Distribution(abc.ABC):
         """
         self.bounds = Bounds()
         self.accepts_floats = accepts_floats
+        self.negate_probability = False
 
-    def reset_bounds(self) -> None:
-        """Reset the bounds of the distribution to be the default, natural bounds (None)."""
+    def reset(self) -> None:
+        """Reset the bounds of the distribution to be the default, and reset :attr:`negate_probability` flag."""
         self.bounds = Bounds()
+        self.negate_probability = False
 
     @abc.abstractmethod
     def __repr__(self) -> str:
@@ -126,6 +131,26 @@ class Distribution(abc.ABC):
 
         self.bounds.upper = (other, True)
         self.bounds.lower = (other, True)
+        return self
+
+    def __ne__(self, other):
+        """Set the upper and lower bounds to ``other``, if possible, and set :attr:`negate_probability`.
+
+        See :meth:`__eq__`.
+
+        :raises NonsenseError: If the user has tried to mix inequality and equality comparison
+        """
+        if not (isinstance(other, int) or (self.accepts_floats and isinstance(other, float))):
+            return NotImplemented
+
+        # If the bounds are already mutated, then we've mixed inequality and equality
+        if self.bounds != Bounds():
+            raise NonsenseError('Cannot have inequality and equality mixed together')
+
+        self.bounds.upper = (other, True)
+        self.bounds.lower = (other, True)
+
+        self.negate_probability = True
         return self
 
     def __lt__(self, other):
@@ -194,6 +219,9 @@ class Distribution(abc.ABC):
 
         if probability < 0:
             raise NonsenseError("This inequality doesn't make sense")
+
+        if self.negate_probability:
+            probability = 1 - probability
 
         return round_sig_fig(probability, 10)
 
@@ -422,5 +450,5 @@ class ProbabilityCalculator:
         :raises NonsenseError: If the bounds of the distribution are invalid
         """
         probability = distribution.calculate(strict=True)
-        distribution.reset_bounds()
+        distribution.reset()
         return probability
