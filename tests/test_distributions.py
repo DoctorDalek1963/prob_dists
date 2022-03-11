@@ -177,6 +177,12 @@ def test_binomial_calculate() -> None:
     with pytest.raises(pd.NonsenseError):
         P(X == 3 < 10)
 
+    with pytest.raises(pd.NonsenseError):
+        P(3 != X > 10)
+
+    with pytest.raises(pd.NonsenseError):
+        P(X != 3 > 10)
+
 
 def test_poisson_pmf() -> None:
     """Test the Poisson distribution PMF."""
@@ -317,3 +323,9 @@ def test_poisson_calculate() -> None:
 
     with pytest.raises(pd.NonsenseError):
         P(X == 3 < 10)
+
+    with pytest.raises(pd.NonsenseError):
+        P(3 != X > 10)
+
+    with pytest.raises(pd.NonsenseError):
+        P(X != 3 > 10)
