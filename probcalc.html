@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>probcalc package &mdash; probcalc 0.2.4 documentation</title>
+  <title>probcalc package &mdash; probcalc 0.2.5 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="_static/favicon.png"/>
@@ -546,8 +546,8 @@ rate of the distribution.</p>
 <p>This function is just a convenient wrapper around <a class="reference internal" href="#probcalc.distributions.Distribution.calculate" title="probcalc.distributions.Distribution.calculate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Distribution.calculate()</span></code></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This function calls <code class="xref py py-meth docutils literal notranslate"><span class="pre">Distribution.reset_bounds()</span></code>, but the
-class method doesn’t on its own. Using the class method multiple times with different inputs can
+<p>This function calls <a class="reference internal" href="#probcalc.distributions.Distribution.reset" title="probcalc.distributions.Distribution.reset"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Distribution.reset()</span></code></a>, but <a class="reference internal" href="#probcalc.distributions.Distribution.calculate" title="probcalc.distributions.Distribution.calculate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Distribution.calculate()</span></code></a>
+doesn’t on its own. Using the class method multiple times with different inputs can
 result in undefined behaviour. Use this wrapper for all interactive use.</p>
 </div>
 <p>This function gets exported as <code class="docutils literal notranslate"><span class="pre">P</span></code> by <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code>, which lets the user do things like:</p>
