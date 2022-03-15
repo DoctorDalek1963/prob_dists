@@ -346,6 +346,17 @@ class BinomialDistribution(Distribution):
         # mypy expects this sum to have ints for some reason, so we ignore it
         return sum(self.pmf(x) for x in range(successes + 1))  # type: ignore[misc]
 
+    def calculate(self, *, strict: bool = True) -> float:
+        """Check for nonsense in an edge case.
+
+        This method overrides :meth:`Distribution.calculate`. See that method for documentation.
+        """
+        if self.bounds.lower == (self._number_of_trials, False):
+            raise NonsenseError(f'Cannot have more successes (> {self._number_of_trials}) '
+                                f'than trials ({self._number_of_trials})')
+
+        return super().calculate(strict=strict)
+
 
 class PoissonDistribution(Distribution):
     """This is a Poisson distribution, used to model independent events that happen at a constant average rate."""
