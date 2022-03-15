@@ -31,6 +31,10 @@ The full docs are available [here](https://doctordalek1963.github.io/probcalc).
 
 ## Changelog
 
+### v0.2.7
+- Fix bug in `ProbabilityCalculator` with resetting bounds after getting an error
+- Deal with edge case in `BinomialDistribution.calculate()`
+
 ### v0.2.6
 - Handle edge case in binomial distributions
 - Allow Poisson to handle much larger numbers
