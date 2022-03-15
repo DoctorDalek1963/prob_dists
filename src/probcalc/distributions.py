@@ -336,9 +336,14 @@ class BinomialDistribution(Distribution):
         :raises NonsenseError: If the number of successes is outside the valid range
         :raises NonsenseError: If the number of successes is not an integer
         """
+        if self.check_nonsense(successes, strict=strict) is not None:
+            return 0
+
+        if successes == self._number_of_trials:
+            return 1
+
         # mypy expects this sum to have ints for some reason, so we ignore it
-        return 0 if self.check_nonsense(successes, strict=strict) is not None else \
-            sum(self.pmf(x) for x in range(successes + 1))  # type: ignore[misc]
+        return sum(self.pmf(x) for x in range(successes + 1))  # type: ignore[misc]
 
 
 class PoissonDistribution(Distribution):
