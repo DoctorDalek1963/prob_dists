@@ -16,6 +16,11 @@ def factorial(n: int) -> int:
     return reduce(mul, range(1, n + 1), 1)
 
 
+def factorial_fraction(n: int) -> float:
+    """Return ``1 / factorial(n)``, but without overflowing."""
+    return reduce(lambda a, b: a / b, range(1, n + 1), 1.0)
+
+
 def choose(n: int, r: int) -> int:
     r"""Return the number of ways to choose ``r`` items from ``n`` elements.
 
