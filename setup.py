@@ -31,6 +31,10 @@ The full docs are available [here](https://doctordalek1963.github.io/probcalc).
 
 ## Changelog
 
+### v0.2.6
+- Handle edge case in binomial distributions
+- Allow Poisson to handle much larger numbers
+
 ### v0.2.5
 - Add nice repr for probability calculator
 - Implement `!=` functionality
