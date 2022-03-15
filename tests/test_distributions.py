@@ -20,6 +20,7 @@ def test_binomial_pmf() -> None:
     X = B(20, 0.25)
     Y = B(14, 0.36)
     Z = B(50, 0.782)
+    W = B(1000, 0.9)
 
     assert X.pmf(0) == approx(3.171211939e-3)
     assert X.pmf(1) == approx(0.02114141293)
@@ -52,22 +53,28 @@ def test_binomial_pmf() -> None:
     assert Z.pmf(36) == approx(0.0734455353)
     assert Z.pmf(45) == approx(0.01631804512)
 
-    with pytest.raises(pd.NonsenseError):
-        X.pmf(-1, strict=True)
-        X.pmf(-3, strict=True)
-        X.pmf(21, strict=True)
-        X.pmf(30, strict=True)
+    assert W.pmf(100) < 1e-100
+    assert W.pmf(200) < 1e-100
+    assert W.pmf(300) < 1e-100
+    assert W.pmf(400) < 1e-100
+    assert W.pmf(500) < 1e-100
+    assert W.pmf(600) < 1e-100
+    assert W.pmf(700) == approx(5.063099384e-69)
+    assert W.pmf(800) == approx(1.639377219e-21)
+    assert W.pmf(900) == approx(0.04201679075)
+    assert W.pmf(1000) == approx(1.747871252e-46)
 
-        X.pmf(12.5, strict=True)  # type: ignore[arg-type]
-        X.pmf(22.3, strict=True)  # type: ignore[arg-type]
+    for num in [-1, -3, 21, 30, 12.5, 22.3]:
+        with pytest.raises(pd.NonsenseError):
+            X.pmf(num, strict=True)  # type: ignore[arg-type]
 
-    assert X.pmf(-1, strict=False) == 0
-    assert X.pmf(-3, strict=False) == 0
-    assert X.pmf(21, strict=False) == 0
-    assert X.pmf(30, strict=False) == 0
+    assert X.pmf(-1, strict=False) < 1e-100
+    assert X.pmf(-3, strict=False) < 1e-100
+    assert X.pmf(21, strict=False) < 1e-100
+    assert X.pmf(30, strict=False) < 1e-100
 
-    assert X.pmf(12.5, strict=False) == 0  # type: ignore[arg-type]
-    assert X.pmf(22.3, strict=False) == 0  # type: ignore[arg-type]
+    assert X.pmf(12.5, strict=False) < 1e-100  # type: ignore[arg-type]
+    assert X.pmf(22.3, strict=False) < 1e-100  # type: ignore[arg-type]
 
 
 def test_binomial_cdf() -> None:
@@ -75,6 +82,7 @@ def test_binomial_cdf() -> None:
     X = B(20, 0.25)
     Y = B(14, 0.36)
     Z = B(50, 0.782)
+    W = B(1000, 0.90)
 
     assert X.cdf(0) == approx(3.1712119939e-3)
     assert X.cdf(1) == approx(0.02431262487)
@@ -107,22 +115,28 @@ def test_binomial_cdf() -> None:
     assert Z.cdf(36) == approx(0.1846045478)
     assert Z.cdf(45) == approx(0.9911912197)
 
-    with pytest.raises(pd.NonsenseError):
-        X.cdf(-1, strict=True)
-        X.cdf(-3, strict=True)
-        X.cdf(21, strict=True)
-        X.cdf(30, strict=True)
+    assert W.cdf(100) < 1e-100
+    assert W.cdf(200) < 1e-100
+    assert W.cdf(300) < 1e-100
+    assert W.cdf(400) < 1e-100
+    assert W.cdf(500) < 1e-100
+    assert W.cdf(600) < 1e-100
+    assert W.cdf(700) == approx(6.823349114e-69)
+    assert W.cdf(800) == approx(2.928054793e-21)
+    assert W.cdf(900) == approx(0.5154177186)
+    assert W.cdf(1000) == 1
 
-        X.cdf(12.5, strict=True)  # type: ignore[arg-type]
-        X.cdf(22.3, strict=True)  # type: ignore[arg-type]
+    for num in [-1, -3, 21, 30, 12.5, 22.3]:
+        with pytest.raises(pd.NonsenseError):
+            X.cdf(num, strict=True)  # type: ignore[arg-type]
 
-    assert X.cdf(-1, strict=False) == 0
-    assert X.cdf(-3, strict=False) == 0
-    assert X.cdf(21, strict=False) == 0
-    assert X.cdf(30, strict=False) == 0
+    assert X.cdf(-1, strict=False) < 1e-100
+    assert X.cdf(-3, strict=False) < 1e-100
+    assert X.cdf(21, strict=False) < 1e-100
+    assert X.cdf(30, strict=False) < 1e-100
 
-    assert X.cdf(12.5, strict=False) == 0  # type: ignore[arg-type]
-    assert X.cdf(22.3, strict=False) == 0  # type: ignore[arg-type]
+    assert X.cdf(12.5, strict=False) < 1e-100  # type: ignore[arg-type]
+    assert X.cdf(22.3, strict=False) < 1e-100  # type: ignore[arg-type]
 
 
 def test_binomial_calculate() -> None:
@@ -189,6 +203,7 @@ def test_poisson_pmf() -> None:
     X = Po(2)
     Y = Po(12.3)
     Z = Po(8.362)
+    W = Po(1000)
 
     assert X.pmf(0) == approx(0.1353352832)
     assert X.pmf(1) == approx(0.2706705665)
@@ -217,11 +232,18 @@ def test_poisson_pmf() -> None:
     assert Z.pmf(10) == approx(0.1075890671)
     assert Z.pmf(20) == approx(2.682305189e-4)
 
-    with pytest.raises(pd.NonsenseError):
-        X.pmf(-1)
+    assert W.pmf(100) < 1e-100
+    assert W.pmf(200) < 1e-100
+    assert W.pmf(300) < 1e-100
+    assert W.pmf(400) < 1e-100
+    assert W.pmf(500) == approx(4.160155476e-69)
+    assert W.pmf(600) == approx(4.010801147e-43)
+    assert W.pmf(700) == approx(2.095736914e-24)
+    assert W.pmf(800) == approx(6.583151642e-12)
+    assert W.pmf(900) == approx(7.516954352e-5)
 
     with pytest.raises(pd.NonsenseError):
-        X.pmf(2.3)  # type: ignore[arg-type]
+        X.pmf(-1)
 
     with pytest.raises(pd.NonsenseError):
         X.pmf(2.3)  # type: ignore[arg-type]
@@ -232,6 +254,7 @@ def test_poisson_cdf() -> None:
     X = Po(2)
     Y = Po(12.3)
     Z = Po(8.362)
+    W = Po(1000)
 
     assert X.cdf(0) == approx(0.1353352832)
     assert X.cdf(1) == approx(0.406005879)
@@ -260,11 +283,18 @@ def test_poisson_cdf() -> None:
     assert Z.cdf(10) == approx(0.7784049707)
     assert Z.cdf(20) == approx(0.999830179)
 
-    with pytest.raises(pd.NonsenseError):
-        X.cdf(-1)
+    assert W.cdf(100) < 1e-100
+    assert W.cdf(200) < 1e-100
+    assert W.cdf(300) < 1e-100
+    assert W.cdf(400) < 1e-100
+    assert W.cdf(500) == approx(8.303834064e-69)
+    assert W.cdf(600) == approx(9.989996782e-43)
+    assert W.cdf(700) == approx(6.933009918e-24)
+    assert W.cdf(800) == approx(3.229888671e-11)
+    assert W.cdf(900) == approx(6.97767356e-4)
 
     with pytest.raises(pd.NonsenseError):
-        X.cdf(2.3)  # type: ignore[arg-type]
+        X.cdf(-1)
 
     with pytest.raises(pd.NonsenseError):
         X.cdf(2.3)  # type: ignore[arg-type]
