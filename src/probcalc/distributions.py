@@ -454,6 +454,13 @@ class ProbabilityCalculator:
 
         :raises NonsenseError: If the bounds of the distribution are invalid
         """
-        probability = distribution.calculate(strict=True)
-        distribution.reset()
+        try:
+            probability = distribution.calculate(strict=True)
+
+        except NonsenseError as e:
+            raise e
+
+        finally:
+            distribution.reset()
+
         return probability
