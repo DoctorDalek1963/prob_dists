@@ -15,17 +15,17 @@ Here's a table of user-friendly aliases and the backend classes they refer to:
    * - Alias
      - Class or function name
    * - P
-     - :class:`probcalc.distributions.ProbabilityCalculator`
+     - :class:`probcalc.distribution_classes.ProbabilityCalculator`
    * - B
      - :class:`probcalc.distributions.BinomialDistribution`
    * - Po
      - :class:`probcalc.distributions.PoissonDistribution`
 """
 
-from . import distributions, utility
-from .distributions import NonsenseError
+from . import distribution_classes, distributions, utility
+from .distribution_classes import NonsenseError
 
-P = distributions.ProbabilityCalculator()
+P = distribution_classes.ProbabilityCalculator()
 B = distributions.BinomialDistribution
 Po = distributions.PoissonDistribution
 
