@@ -31,6 +31,9 @@ The full docs are available [here](https://doctordalek1963.github.io/probcalc).
 
 ## Changelog
 
+### v0.2.8
+- Remove SciPy dependency by implemeting Poisson pmf with stdlib
+
 ### v0.2.7
 - Fix bug in `ProbabilityCalculator` with resetting bounds after getting an error
 - Deal with edge case in `BinomialDistribution.calculate()`

@@ -324,7 +324,7 @@ class BinomialDistribution(Distribution):
             return 0
 
         return self._choose(successes) * (self._probability ** successes) * \
-               ((1 - self._probability) ** (self._number_of_trials - successes))
+            ((1 - self._probability) ** (self._number_of_trials - successes))
 
     def cdf(self, successes: int, *, strict: bool = True) -> float:
         """Return the probability that we get less than or equal to the given number of successes.
