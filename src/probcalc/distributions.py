@@ -9,9 +9,8 @@
 from __future__ import annotations
 
 import abc
+import math
 from typing import Literal
-
-from scipy import stats as sc_stats
 
 from .utility import choose, round_sig_fig
 
@@ -414,7 +413,16 @@ class PoissonDistribution(Distribution):
         :raises NonsenseError: If the number of occurrences is negative
         :raises NonsenseError: If the number of occurrences is not an integer
         """
-        return 0 if self.check_nonsense(number, strict=strict) else float(sc_stats.poisson.pmf(number, self._rate))
+        if self.check_nonsense(number, strict=strict) is not None:
+            return 0
+
+        if number == 0:
+            return math.exp(-self._rate)
+
+        # This line is pure magic that I stole from the SciPy source code
+        # https://github.com/scipy/scipy/blob/main/scipy/stats/_discrete_distns.py#L854-L860
+        log_pmf = number * math.log(self._rate) - math.lgamma(number + 1) - self._rate
+        return math.exp(log_pmf)
 
     def cdf(self, number: int, *, strict: bool = True) -> float:
         """Return the probability that we get less than or equal to the given number of occurrences.
