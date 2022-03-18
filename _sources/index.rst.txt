@@ -1,6 +1,8 @@
 Welcome to the probcalc docs
 ============================
 
+.. _pylint: https://pylint.org/
+
 This is the documentation for probcalc version |release|.
 
 This is a project that aims to make calculations with random variables
@@ -16,6 +18,11 @@ Here's a simple example of the kind of things that this project lets you do:
 0.02159364088
 >>> P(10 <= X < 20)
 0.1965915424
+
+Here's a brief overview of the project structure, courtesy of `pylint`_:
+
+.. image:: int-imports.png
+   :alt: Internal import graph
 
 .. toctree::
    :maxdepth: 1
