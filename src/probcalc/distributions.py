@@ -320,9 +320,11 @@ class BinomialDistribution(Distribution):
         :raises NonsenseError: If the number of successes is outside the valid range
         :raises NonsenseError: If the number of successes is not an integer
         """
-        return 0 if self.check_nonsense(successes, strict=strict) is not None else \
-            self._choose(successes) * (self._probability ** successes) * \
-            ((1 - self._probability) ** (self._number_of_trials - successes))
+        if self.check_nonsense(successes, strict=strict) is not None:
+            return 0
+
+        return self._choose(successes) * (self._probability ** successes) * \
+               ((1 - self._probability) ** (self._number_of_trials - successes))
 
     def cdf(self, successes: int, *, strict: bool = True) -> float:
         """Return the probability that we get less than or equal to the given number of successes.
@@ -436,8 +438,10 @@ class PoissonDistribution(Distribution):
         :raises NonsenseError: If the number of occurrences is negative
         :raises NonsenseError: If the number of occurrences is not an integer
         """
-        return 0 if self.check_nonsense(number, strict=strict) is not None else \
-            sum(self.pmf(x) for x in range(number + 1))  # type: ignore[misc]
+        if self.check_nonsense(number, strict=strict) is not None:
+            return 0
+
+        return sum(self.pmf(x) for x in range(number + 1))  # type: ignore[misc]
 
 
 class ProbabilityCalculator:
