@@ -20,6 +20,8 @@ Here's a table of user-friendly aliases and the backend classes they refer to:
      - :class:`probcalc.distributions.BinomialDistribution`
    * - Po
      - :class:`probcalc.distributions.PoissonDistribution`
+   * - N
+     - :class:`probcalc.distributions.NormalDistribution`
 """
 
 from . import distribution_classes, distributions, utility
@@ -28,7 +30,8 @@ from .distribution_classes import NonsenseError
 P = distribution_classes.ProbabilityCalculator()
 B = distributions.BinomialDistribution
 Po = distributions.PoissonDistribution
+N = distributions.NormalDistribution
 
-__all__ = ['P', 'B', 'Po', 'NonsenseError', 'distributions', 'utility']
+__all__ = ['P', 'B', 'Po', 'N', 'NonsenseError', 'distributions', 'utility']
 
 __version__ = '0.2.8'

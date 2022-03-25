@@ -12,6 +12,11 @@ import math
 from typing import Literal
 
 from .distribution_classes import Distribution, NonsenseError
+from .utility import erf
+
+# Compute constants at import time for slight speed increase
+ROOT_TWO = math.sqrt(2)
+ROOT_TWO_PI = math.sqrt(2 * math.pi)
 
 
 class BinomialDistribution(Distribution):
@@ -198,7 +203,7 @@ class PoissonDistribution(Distribution):
 
         :param int number: The number of occurrences to find the probability for
         :param bool strict: Whether to throw errors for invalid input, or return 0
-        :returns float: The probability of getting exactly this many occurrences
+        :returns float: The probability of getting less than or equal to this many occurrences
 
         :raises NonsenseError: If the number of occurrences is negative
         :raises NonsenseError: If the number of occurrences is not an integer
@@ -207,3 +212,47 @@ class PoissonDistribution(Distribution):
             return 0
 
         return sum(self.pmf(x) for x in range(number + 1))  # type: ignore[misc]
+
+
+class NormalDistribution(Distribution):
+    """A normal distribution with mean and standard deviation."""
+
+    def __init__(self, mean: float, std_dev: float):
+        """Create a normal distribution with given mean and standard deviation.
+
+        .. note:: We use standard deviation, not variance.
+        """
+        if std_dev == 0:
+            raise NonsenseError('Cannot haves standard deviation of 0')
+
+        super().__init__(accepts_floats=True)
+
+        self._mean = mean
+        self._std_dev = std_dev
+
+    def __repr__(self) -> str:
+        """Return a nice repr of the distribution."""
+        return f'N({self._mean}, {self._std_dev}²)'
+
+    def pmf(self, value: float, *, strict: bool = True) -> float:
+        """Return the probability of getting the given value from this normal distribution.
+
+        :param float value: The value to find the probability of
+        :param bool strict: Whether to throw errors for invalid input, or return 0
+        :returns float: The probability of getting exactly this many occurrences
+        """
+        exponent = -0.5 * (((value - self._mean) / self._std_dev) ** 2)
+        return math.exp(exponent) / (self._std_dev * ROOT_TWO_PI)
+
+    def cdf(self, value: int, *, strict: bool = True) -> float:
+        r"""Return the probability that we get less than or equal to the given number of occurrences.
+
+        This method uses the formula :math:`\frac{1}{2}\left[1+\text{erf}\left(\frac{x}{\sqrt{2}}\right)\right]`
+
+        See :func:`probcalc.utility.erf`.
+
+        :param int value: The value to find the probability for
+        :param bool strict: Whether to throw errors for invalid input, or return 0
+        :returns float: The probability of getting less than or equal to this value
+        """
+        return 0.5 * (1 + erf((value - self._mean) / (self._std_dev * ROOT_TWO)))
