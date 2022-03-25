@@ -68,7 +68,7 @@ def erf(x: float) -> float:
 
     The error function is defined as an integral which cannot be evaluated using analytical techniques
     (:math:`\text{erf}z=\frac{2}{\sqrt{\pi}}\int_0^z e^{-t^2}dt`). Rather than doing numeric integration,
-     this method uses a numerical approximation found on the Wikipedia page.
+    this method uses a numerical approximation found on the Wikipedia page.
     """
     if x == 0:
         return 0
