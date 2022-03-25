@@ -25,11 +25,25 @@ Or, let's say there's a call center that gets an average of 5 calls every minute
 0.3840393452
 ```
 
+And of course, you can use the normal distribution:
+
+```python3
+>>> from probcalc import N
+>>> Z = N(0, 1)
+>>> P(-1 < Z < 1)
+0.6826894723
+```
+
 This project will implement more distributions in the future, and they will all be able to be used like this.
 
 The full docs are available [here](https://doctordalek1963.github.io/probcalc).
 
 ## Changelog
+
+## v0.3.0
+- Add normal distribution
+- Use more efficient calculations of binomial PMF
+- Check for nonsense in inequality assignment
 
 ### v0.2.8
 - Remove SciPy dependency by implemeting Poisson pmf with stdlib
