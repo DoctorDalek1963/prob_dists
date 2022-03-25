@@ -237,6 +237,16 @@ class NormalDistribution(Distribution):
         """Return a nice repr of the distribution."""
         return f'N({self._mean}, {self._std_dev}²)'
 
+    def __lt__(self, other):
+        """Call :meth:`probcalc.distribution_classes.Distribution.__le__`.
+
+        This is because normal distributions don't distinguish strong/weak inequality.
+
+        We override :meth:`__lt__` here but no other inequality dunder method. This is because of how the
+        :meth:`probcalc.distribution_classes.Distribution.calculate` method works under the hood. Don't worry about it.
+        """
+        return super().__le__(other)
+
     def pmf(self, value: float, *, strict: bool = True) -> float:
         """Return the probability of getting the given value from this normal distribution.
 
@@ -247,7 +257,7 @@ class NormalDistribution(Distribution):
         exponent = -0.5 * (((value - self._mean) / self._std_dev) ** 2)
         return math.exp(exponent) / (self._std_dev * ROOT_TWO_PI)
 
-    def cdf(self, value: int, *, strict: bool = True) -> float:
+    def cdf(self, value: float, *, strict: bool = True) -> float:
         r"""Return the probability that we get less than or equal to the given number of occurrences.
 
         This method uses the formula :math:`\frac{1}{2}\left[1+\text{erf}\left(\frac{x}{\sqrt{2}}\right)\right]`
