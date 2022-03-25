@@ -156,6 +156,10 @@ class Distribution(abc.ABC):
         if not (isinstance(other, int) or (self.accepts_floats and isinstance(other, float))):
             return NotImplemented
 
+        if self.bounds.lower[0] is not None:
+            if self.bounds.lower[0] > other:
+                raise NonsenseError('Cannot have upper bound less than lower bound')
+
         self.bounds.upper = (other, False)
         return self
 
@@ -163,6 +167,10 @@ class Distribution(abc.ABC):
         """Set the upper bound and include this value."""
         if not (isinstance(other, int) or (self.accepts_floats and isinstance(other, float))):
             return NotImplemented
+
+        if self.bounds.lower[0] is not None:
+            if self.bounds.lower[0] > other:
+                raise NonsenseError('Cannot have upper bound less than lower bound')
 
         self.bounds.upper = (other, True)
         return self
@@ -172,6 +180,10 @@ class Distribution(abc.ABC):
         if not (isinstance(other, int) or (self.accepts_floats and isinstance(other, float))):
             return NotImplemented
 
+        if self.bounds.upper[0] is not None:
+            if self.bounds.upper[0] < other:
+                raise NonsenseError('Cannot have lower bound greater than upper bound')
+
         self.bounds.lower = (other, False)
         return self
 
@@ -179,6 +191,10 @@ class Distribution(abc.ABC):
         """Set the lower bound and include this value."""
         if not (isinstance(other, int) or (self.accepts_floats and isinstance(other, float))):
             return NotImplemented
+
+        if self.bounds.upper[0] is not None:
+            if self.bounds.upper[0] < other:
+                raise NonsenseError('Cannot have lower bound greater than upper bound')
 
         self.bounds.lower = (other, True)
         return self
