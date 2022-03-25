@@ -8,11 +8,11 @@
 
 All test values calculated with Casio fx-991ES.
 """
+
 import pytest
 from pytest import approx
 
-import probcalc as pd
-from probcalc import P, B, Po
+from probcalc import P, B, Po, NonsenseError
 
 
 def test_binomial_pmf() -> None:
@@ -65,7 +65,7 @@ def test_binomial_pmf() -> None:
     assert W.pmf(1000) == approx(1.747871252e-46)
 
     for num in [-1, -3, 21, 30, 12.5, 22.3]:
-        with pytest.raises(pd.NonsenseError):
+        with pytest.raises(NonsenseError):
             X.pmf(num, strict=True)  # type: ignore[arg-type]
 
     assert X.pmf(-1, strict=False) < 1e-100
@@ -127,7 +127,7 @@ def test_binomial_cdf() -> None:
     assert W.cdf(1000) == 1
 
     for num in [-1, -3, 21, 30, 12.5, 22.3]:
-        with pytest.raises(pd.NonsenseError):
+        with pytest.raises(NonsenseError):
             X.cdf(num, strict=True)  # type: ignore[arg-type]
 
     assert X.cdf(-1, strict=False) < 1e-100
@@ -173,40 +173,40 @@ def test_binomial_calculate() -> None:
     assert P(Z > 30) == approx(1 - Z.cdf(30))
     assert P(Z >= 20) == approx(1 - Z.cdf(19))
 
-    with pytest.raises(pd.NonsenseError):
+    with pytest.raises(NonsenseError):
         P(10 < X < 8)
 
-    with pytest.raises(pd.NonsenseError):
+    with pytest.raises(NonsenseError):
         P(4 > X >= 12)
 
-    with pytest.raises(pd.NonsenseError):
+    with pytest.raises(NonsenseError):
         P(10 < X == 3)
 
-    with pytest.raises(pd.NonsenseError):
+    with pytest.raises(NonsenseError):
         P(3 == X > 10)
 
-    with pytest.raises(pd.NonsenseError):
+    with pytest.raises(NonsenseError):
         P(X == 3 > 10)
 
-    with pytest.raises(pd.NonsenseError):
+    with pytest.raises(NonsenseError):
         P(X == 3 < 10)
 
-    with pytest.raises(pd.NonsenseError):
+    with pytest.raises(NonsenseError):
         P(3 != X > 10)
 
-    with pytest.raises(pd.NonsenseError):
+    with pytest.raises(NonsenseError):
         P(X != 3 > 10)
 
     assert P(X >= 20) == P(X == 20)
-    with pytest.raises(pd.NonsenseError):
+    with pytest.raises(NonsenseError):
         P(X > 20)
 
     assert P(Y >= 14) == P(Y == 14)
-    with pytest.raises(pd.NonsenseError):
+    with pytest.raises(NonsenseError):
         P(Y > 14)
 
     assert P(Z >= 50) == P(Z == 50)
-    with pytest.raises(pd.NonsenseError):
+    with pytest.raises(NonsenseError):
         P(Z > 50)
 
 
@@ -254,10 +254,10 @@ def test_poisson_pmf() -> None:
     assert W.pmf(800) == approx(6.583151642e-12)
     assert W.pmf(900) == approx(7.516954352e-5)
 
-    with pytest.raises(pd.NonsenseError):
+    with pytest.raises(NonsenseError):
         X.pmf(-1)
 
-    with pytest.raises(pd.NonsenseError):
+    with pytest.raises(NonsenseError):
         X.pmf(2.3)  # type: ignore[arg-type]
 
 
@@ -305,10 +305,10 @@ def test_poisson_cdf() -> None:
     assert W.cdf(800) == approx(3.229888671e-11)
     assert W.cdf(900) == approx(6.97767356e-4)
 
-    with pytest.raises(pd.NonsenseError):
+    with pytest.raises(NonsenseError):
         X.cdf(-1)
 
-    with pytest.raises(pd.NonsenseError):
+    with pytest.raises(NonsenseError):
         X.cdf(2.3)  # type: ignore[arg-type]
 
 
@@ -348,26 +348,26 @@ def test_poisson_calculate() -> None:
     assert P(Z > 30) == approx(1 - Z.cdf(30))
     assert P(Z >= 20) == approx(1 - Z.cdf(19))
 
-    with pytest.raises(pd.NonsenseError):
+    with pytest.raises(NonsenseError):
         P(10 < X < 8)
 
-    with pytest.raises(pd.NonsenseError):
+    with pytest.raises(NonsenseError):
         P(4 > X >= 12)
 
-    with pytest.raises(pd.NonsenseError):
+    with pytest.raises(NonsenseError):
         P(10 < X == 3)
 
-    with pytest.raises(pd.NonsenseError):
+    with pytest.raises(NonsenseError):
         P(3 == X > 10)
 
-    with pytest.raises(pd.NonsenseError):
+    with pytest.raises(NonsenseError):
         P(X == 3 > 10)
 
-    with pytest.raises(pd.NonsenseError):
+    with pytest.raises(NonsenseError):
         P(X == 3 < 10)
 
-    with pytest.raises(pd.NonsenseError):
+    with pytest.raises(NonsenseError):
         P(3 != X > 10)
 
-    with pytest.raises(pd.NonsenseError):
+    with pytest.raises(NonsenseError):
         P(X != 3 > 10)

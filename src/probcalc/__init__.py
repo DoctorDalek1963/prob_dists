@@ -13,7 +13,7 @@ Here's a table of user-friendly aliases and the backend classes they refer to:
    :header-rows: 1
 
    * - Alias
-     - Class or function name
+     - Class name
    * - P
      - :class:`probcalc.distribution_classes.ProbabilityCalculator`
    * - B
