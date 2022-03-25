@@ -241,11 +241,15 @@ class NormalDistribution(Distribution):
         """Call :meth:`probcalc.distribution_classes.Distribution.__le__`.
 
         This is because normal distributions don't distinguish strong/weak inequality.
-
-        We override :meth:`__lt__` here but no other inequality dunder method. This is because of how the
-        :meth:`probcalc.distribution_classes.Distribution.calculate` method works under the hood. Don't worry about it.
         """
         return super().__le__(other)
+
+    def __ge__(self, other):
+        """Call :meth:`probcalc.distribution_classes.Distribution.__gt__`.
+
+        This is because normal distributions don't distinguish strong/weak inequality.
+        """
+        return super().__gt__(other)
 
     def pmf(self, value: float, *, strict: bool = True) -> float:
         """Return the probability of getting the given value from this normal distribution.

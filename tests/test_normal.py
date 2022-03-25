@@ -164,7 +164,7 @@ def test_calculate() -> None:
     assert P(3 < X <= 12) == approx(X.cdf(12) - X.cdf(3))
     assert P(20 >= X) == approx(X.cdf(20))
     assert P(X <= 20) == approx(X.cdf(20))
-    assert P(0 <= X <= 4) == approx(X.cdf(4) - X.cdf(0) + X.pmf(0))
+    assert P(0 <= X <= 4) == approx(X.cdf(4) - X.cdf(0))
     assert P(7 <= X < 15) == approx(X.cdf(15) - X.cdf(7))
     assert P(3 < X < 10) == approx(X.cdf(10) - X.cdf(3))
 
@@ -211,3 +211,7 @@ def test_calculate() -> None:
 
     with pytest.raises(NonsenseError):
         P(X != 3 > 10)
+
+    assert P(-2 < X < 4) == P(-2 <= X < 4) == P(-2 < X <= 4) == P(-2 <= X <= 4)
+    assert P(-6.3 < Y < -0.2) == P(-6.3 <= Y < -0.2) == P(-6.3 < Y <= -0.2) == P(-6.3 <= Y <= -0.2)
+    assert P(-1 < Z < 1) == P(-1 <= Z < 1) == P(-1 < Z <= 1) == P(-1 <= Z <= 1)
