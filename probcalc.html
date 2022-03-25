@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>probcalc package &mdash; probcalc 0.2.8 documentation</title>
+  <title>probcalc package &mdash; probcalc 0.3.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="_static/favicon.png"/>
@@ -619,8 +619,13 @@ rate of the distribution.</p>
 <span class="sig-name descname"><span class="pre">__lt__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#probcalc.distributions.NormalDistribution.__lt__" title="Permalink to this definition"></a></dt>
 <dd><p>Call <a class="reference internal" href="#probcalc.distribution_classes.Distribution.__le__" title="probcalc.distribution_classes.Distribution.__le__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">probcalc.distribution_classes.Distribution.__le__()</span></code></a>.</p>
 <p>This is because normal distributions don’t distinguish strong/weak inequality.</p>
-<p>We override <a class="reference internal" href="#probcalc.distributions.NormalDistribution.__lt__" title="probcalc.distributions.NormalDistribution.__lt__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__lt__()</span></code></a> here but no other inequality dunder method. This is because of how the
-<a class="reference internal" href="#probcalc.distribution_classes.Distribution.calculate" title="probcalc.distribution_classes.Distribution.calculate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">probcalc.distribution_classes.Distribution.calculate()</span></code></a> method works under the hood. Don’t worry about it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="probcalc.distributions.NormalDistribution.__ge__">
+<span class="sig-name descname"><span class="pre">__ge__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#probcalc.distributions.NormalDistribution.__ge__" title="Permalink to this definition"></a></dt>
+<dd><p>Call <a class="reference internal" href="#probcalc.distribution_classes.Distribution.__gt__" title="probcalc.distribution_classes.Distribution.__gt__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">probcalc.distribution_classes.Distribution.__gt__()</span></code></a>.</p>
+<p>This is because normal distributions don’t distinguish strong/weak inequality.</p>
 </dd></dl>
 
 <dl class="py method">
