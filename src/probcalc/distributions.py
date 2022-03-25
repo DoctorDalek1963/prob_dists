@@ -12,7 +12,6 @@ import math
 from typing import Literal
 
 from .distribution_classes import Distribution, NonsenseError
-from .utility import choose
 
 
 class BinomialDistribution(Distribution):
@@ -31,10 +30,6 @@ class BinomialDistribution(Distribution):
     def __repr__(self) -> str:
         """Return a nice repr of the distribution."""
         return f'B({self._number_of_trials}, {self._probability})'
-
-    def _choose(self, r: int) -> int:
-        """Call :meth:`probcalc.utility.choose` with the instance number of trials and the provided value."""
-        return choose(self._number_of_trials, r)
 
     def check_nonsense(self, successes: int, *, strict: bool) -> Literal[None, -1]:
         """Check if the given number of successes is nonsense.
@@ -84,8 +79,17 @@ class BinomialDistribution(Distribution):
         if self.check_nonsense(successes, strict=strict) is not None:
             return 0
 
-        return self._choose(successes) * (self._probability ** successes) * \
-            ((1 - self._probability) ** (self._number_of_trials - successes))
+        # PMF taken from https://github.com/scipy/scipy/blob/main/scipy/stats/_discrete_distns.py#L67-L74
+        magic_number = math.lgamma(self._number_of_trials + 1) - (
+                math.lgamma(successes + 1) +
+                math.lgamma(self._number_of_trials - successes + 1)
+        )
+
+        return math.exp(
+            magic_number +
+            successes * math.log(self._probability) +
+            (self._number_of_trials - successes) * math.log1p(-self._probability)
+        )
 
     def cdf(self, successes: int, *, strict: bool = True) -> float:
         """Return the probability that we get less than or equal to the given number of successes.
