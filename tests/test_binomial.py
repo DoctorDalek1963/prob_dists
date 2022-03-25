@@ -4,7 +4,7 @@
 # This program is licensed under GNU GPLv3, available here:
 # <https://www.gnu.org/licenses/gpl-3.0.html>
 
-"""A simple test module to test the :mod:`probcalc.distributions` module.
+"""A simple test module to test the :class:`probcalc.distributions.BinomialDistribution`.
 
 All test values calculated with a Casio fx-991EX Classwiz.
 """

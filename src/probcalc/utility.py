@@ -66,8 +66,9 @@ def round_sig_fig(n: float, sig_fig: int) -> float:
 def erf(x: float) -> float:
     r"""Return the error function evaluated at :math:`x`.
 
-    The error function is defined as an integral which cannot be evaluated using analytical techniques.
-    Rather than doing numeric integration, this method uses a numerical approximation found on the Wikipedia page.
+    The error function is defined as an integral which cannot be evaluated using analytical techniques
+    (:math:`\text{erf}z=\frac{2}{\sqrt{\pi}}\int_0^z e^{-t^2}dt`). Rather than doing numeric integration,
+     this method uses a numerical approximation found on the Wikipedia page.
     """
     if x == 0:
         return 0
