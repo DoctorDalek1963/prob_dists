@@ -223,7 +223,10 @@ class NormalDistribution(Distribution):
         .. note:: We use standard deviation, not variance.
         """
         if std_dev == 0:
-            raise NonsenseError('Cannot haves standard deviation of 0')
+            raise NonsenseError('Cannot have standard deviation of 0')
+
+        if std_dev < 0:
+            raise NonsenseError('Cannot have negative standard deviation')
 
         super().__init__(accepts_floats=True)
 
