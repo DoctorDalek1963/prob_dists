@@ -12,7 +12,6 @@ import math
 from typing import Literal
 
 from .distribution_classes import Distribution, NonsenseError
-from .utility import erf
 
 # Compute constants at import time for slight speed increase
 ROOT_TWO = math.sqrt(2)
@@ -266,10 +265,8 @@ class NormalDistribution(Distribution):
 
         This method uses the formula :math:`\frac{1}{2}\left[1+\text{erf}\left(\frac{x}{\sqrt{2}}\right)\right]`
 
-        See :func:`probcalc.utility.erf`.
-
         :param int value: The value to find the probability for
         :param bool strict: Whether to throw errors for invalid input, or return 0
         :returns float: The probability of getting less than or equal to this value
         """
-        return 0.5 * (1 + erf((value - self._mean) / (self._std_dev * ROOT_TWO)))
+        return 0.5 * (1 + math.erf((value - self._mean) / (self._std_dev * ROOT_TWO)))

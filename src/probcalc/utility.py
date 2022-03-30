@@ -7,7 +7,7 @@
 """A simple utility module to just provide helper functions for the maths."""
 
 from functools import reduce
-from math import exp, floor, log10, pi, sqrt
+from math import floor, log10, pi, sqrt
 from operator import mul
 
 # Compute constants at import time for slight speed increase
@@ -61,33 +61,3 @@ def round_sig_fig(n: float, sig_fig: int) -> float:
     """
     # This code was taken from a comment on this SO answer: https://stackoverflow.com/a/3411435/12985838
     return n if n == 0 else round(n, -int(floor(log10(abs(n)))) + (sig_fig - 1))
-
-
-def erf(x: float) -> float:
-    r"""Return the error function evaluated at :math:`x`.
-
-    The error function is defined as an integral which cannot be evaluated using analytical techniques
-    (:math:`\text{erf}z=\frac{2}{\sqrt{\pi}}\int_0^z e^{-t^2}dt`). Rather than doing numeric integration,
-    this method uses a numerical approximation found on the Wikipedia page.
-    """
-    if x == 0:
-        return 0
-
-    if x < 0:
-        return -erf(-x)
-
-    # Magic numbers taken from https://en.wikipedia.org/wiki/Error_function#Approximation_with_elementary_functions
-    t = 1 / (1 + 0.3275911 * x)
-    a1 = 0.254829592
-    a2 = -0.284496736
-    a3 = 1.421413741
-    a4 = -1.453152027
-    a5 = 1.061405429
-
-    return 1 - (
-        a1 * t +
-        a2 * t ** 2 +
-        a3 * t ** 3 +
-        a4 * t ** 4 +
-        a5 * t ** 5
-    ) * exp(-x ** 2)

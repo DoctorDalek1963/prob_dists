@@ -40,7 +40,10 @@ The full docs are available [here](https://doctordalek1963.github.io/probcalc).
 
 ## Changelog
 
-## v0.3.0
+### v0.3.1
+- Improve performance of normal distribution CDF with stdlib
+
+### v0.3.0
 - Add normal distribution
 - Use more efficient calculations of binomial PMF
 - Check for nonsense in inequality assignment
