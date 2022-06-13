@@ -40,6 +40,9 @@ The full docs are available [here](https://doctordalek1963.github.io/probcalc).
 
 ## Changelog
 
+### [Unreleased]
+- Disallow keyword arguments when using `P()`
+
 ### v0.3.1
 - Improve performance of normal distribution CDF with stdlib
 

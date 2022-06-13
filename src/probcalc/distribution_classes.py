@@ -275,7 +275,7 @@ class ProbabilityCalculator:
         """Return a very simple repr of the calculator."""
         return 'P'
 
-    def __call__(self, distribution: Distribution) -> float:
+    def __call__(self, distribution: Distribution, /) -> float:
         """Return the probability of a random variable from this distribution taking on a value within its bounds.
 
         This function is just a convenient wrapper around :meth:`Distribution.calculate`.
