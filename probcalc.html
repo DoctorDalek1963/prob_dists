@@ -15,6 +15,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -74,9 +75,9 @@
            <div itemprop="articleBody">
              
   <section id="probcalc-package">
-<h1>probcalc package<a class="headerlink" href="#probcalc-package" title="Permalink to this headline"></a></h1>
+<h1>probcalc package<a class="headerlink" href="#probcalc-package" title="Permalink to this heading"></a></h1>
 <section id="module-probcalc">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-probcalc" title="Permalink to this headline"></a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-probcalc" title="Permalink to this heading"></a></h2>
 <p>This is the top-level <code class="docutils literal notranslate"><span class="pre">probcalc</span></code> package, which contains all the subpackages and submodules of the project.</p>
 <p>Here’s a table of user-friendly aliases and the backend classes they refer to:</p>
 <table class="colwidths-given docutils align-default">
@@ -106,10 +107,10 @@
 </table>
 </section>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
 </section>
 <section id="module-probcalc.distribution_classes">
-<span id="probcalc-distribution-classes-module"></span><h2>probcalc.distribution_classes module<a class="headerlink" href="#module-probcalc.distribution_classes" title="Permalink to this headline"></a></h2>
+<span id="probcalc-distribution-classes-module"></span><h2>probcalc.distribution_classes module<a class="headerlink" href="#module-probcalc.distribution_classes" title="Permalink to this heading"></a></h2>
 <p>A simple module to contain superclasses to be used by distributions.</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="probcalc.distribution_classes.NonsenseError">
@@ -176,7 +177,7 @@ To check against that, though, we need to be able to check <a class="reference i
 <dl class="py class">
 <dt class="sig sig-object py" id="probcalc.distribution_classes.Distribution">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">probcalc.distribution_classes.</span></span><span class="sig-name descname"><span class="pre">Distribution</span></span><a class="headerlink" href="#probcalc.distribution_classes.Distribution" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
 <p>This is an abstract superclass representing an arbitrary probability distribution.</p>
 <p>It implements logical comparison dunder methods and <a class="reference internal" href="#probcalc.distribution_classes.Distribution.calculate" title="probcalc.distribution_classes.Distribution.calculate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">calculate()</span></code></a>, which allow
 it to be used easily in <code class="xref py py-func docutils literal notranslate"><span class="pre">calculate_probability()</span></code>.</p>
@@ -355,7 +356,7 @@ distribution takes on a value less than or equal to the given value.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="probcalc.distribution_classes.ProbabilityCalculator.__call__">
-<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distribution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#probcalc.distribution_classes.Distribution" title="probcalc.distribution_classes.Distribution"><span class="pre">probcalc.distribution_classes.Distribution</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#probcalc.distribution_classes.ProbabilityCalculator.__call__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distribution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#probcalc.distribution_classes.Distribution" title="probcalc.distribution_classes.Distribution"><span class="pre">Distribution</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#probcalc.distribution_classes.ProbabilityCalculator.__call__" title="Permalink to this definition"></a></dt>
 <dd><p>Return the probability of a random variable from this distribution taking on a value within its bounds.</p>
 <p>This function is just a convenient wrapper around <a class="reference internal" href="#probcalc.distribution_classes.Distribution.calculate" title="probcalc.distribution_classes.Distribution.calculate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Distribution.calculate()</span></code></a>.</p>
 <div class="admonition note">
@@ -394,12 +395,12 @@ result in undefined behaviour. Use this wrapper for all interactive use.</p>
 
 </section>
 <section id="module-probcalc.distributions">
-<span id="probcalc-distributions-module"></span><h2>probcalc.distributions module<a class="headerlink" href="#module-probcalc.distributions" title="Permalink to this headline"></a></h2>
+<span id="probcalc-distributions-module"></span><h2>probcalc.distributions module<a class="headerlink" href="#module-probcalc.distributions" title="Permalink to this heading"></a></h2>
 <p>This module contains classes for various probability distributions, and a convenience function.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="probcalc.distributions.BinomialDistribution">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">probcalc.distributions.</span></span><span class="sig-name descname"><span class="pre">BinomialDistribution</span></span><a class="headerlink" href="#probcalc.distributions.BinomialDistribution" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#probcalc.distribution_classes.Distribution" title="probcalc.distribution_classes.Distribution"><code class="xref py py-class docutils literal notranslate"><span class="pre">probcalc.distribution_classes.Distribution</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#probcalc.distribution_classes.Distribution" title="probcalc.distribution_classes.Distribution"><code class="xref py py-class docutils literal notranslate"><span class="pre">Distribution</span></code></a></p>
 <p>This is a binomial distribution, used to model multiple independent, binary trials.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="probcalc.distributions.BinomialDistribution.__init__">
@@ -501,7 +502,7 @@ result in undefined behaviour. Use this wrapper for all interactive use.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="probcalc.distributions.PoissonDistribution">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">probcalc.distributions.</span></span><span class="sig-name descname"><span class="pre">PoissonDistribution</span></span><a class="headerlink" href="#probcalc.distributions.PoissonDistribution" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#probcalc.distribution_classes.Distribution" title="probcalc.distribution_classes.Distribution"><code class="xref py py-class docutils literal notranslate"><span class="pre">probcalc.distribution_classes.Distribution</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#probcalc.distribution_classes.Distribution" title="probcalc.distribution_classes.Distribution"><code class="xref py py-class docutils literal notranslate"><span class="pre">Distribution</span></code></a></p>
 <p>This is a Poisson distribution, used to model independent events that happen at a constant average rate.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="probcalc.distributions.PoissonDistribution.__init__">
@@ -596,7 +597,7 @@ rate of the distribution.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="probcalc.distributions.NormalDistribution">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">probcalc.distributions.</span></span><span class="sig-name descname"><span class="pre">NormalDistribution</span></span><a class="headerlink" href="#probcalc.distributions.NormalDistribution" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#probcalc.distribution_classes.Distribution" title="probcalc.distribution_classes.Distribution"><code class="xref py py-class docutils literal notranslate"><span class="pre">probcalc.distribution_classes.Distribution</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#probcalc.distribution_classes.Distribution" title="probcalc.distribution_classes.Distribution"><code class="xref py py-class docutils literal notranslate"><span class="pre">Distribution</span></code></a></p>
 <p>A normal distribution with mean and standard deviation.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="probcalc.distributions.NormalDistribution.__init__">
@@ -667,7 +668,7 @@ rate of the distribution.</p>
 
 </section>
 <section id="module-probcalc.utility">
-<span id="probcalc-utility-module"></span><h2>probcalc.utility module<a class="headerlink" href="#module-probcalc.utility" title="Permalink to this headline"></a></h2>
+<span id="probcalc-utility-module"></span><h2>probcalc.utility module<a class="headerlink" href="#module-probcalc.utility" title="Permalink to this heading"></a></h2>
 <p>A simple utility module to just provide helper functions for the maths.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="probcalc.utility.factorial">
