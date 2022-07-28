@@ -35,7 +35,7 @@ class BinomialDistribution(Distribution):
         """Return a nice repr of the distribution."""
         return f'B({self._number_of_trials}, {self._probability})'
 
-    def check_nonsense(self, successes: int, *, strict: bool) -> Literal[None, -1]:
+    def _check_nonsense(self, successes: int, *, strict: bool) -> Literal[None, -1]:
         """Check if the given number of successes is nonsense.
 
         :param int successes: The number of successes to check
@@ -54,7 +54,7 @@ class BinomialDistribution(Distribution):
 
         if successes > self._number_of_trials:
             if strict:
-                raise NonsenseError(f'Cannot have more success ({successes}) than trials ({self._number_of_trials})')
+                raise NonsenseError(f'Cannot have more successes ({successes}) than trials ({self._number_of_trials})')
 
             return -1
 
@@ -80,7 +80,7 @@ class BinomialDistribution(Distribution):
         :raises NonsenseError: If the number of successes is outside the valid range
         :raises NonsenseError: If the number of successes is not an integer
         """
-        if self.check_nonsense(successes, strict=strict) is not None:
+        if self._check_nonsense(successes, strict=strict) is not None:
             return 0
 
         # PMF taken from https://github.com/scipy/scipy/blob/main/scipy/stats/_discrete_distns.py#L67-L74
@@ -107,7 +107,7 @@ class BinomialDistribution(Distribution):
         :raises NonsenseError: If the number of successes is outside the valid range
         :raises NonsenseError: If the number of successes is not an integer
         """
-        if self.check_nonsense(successes, strict=strict) is not None:
+        if self._check_nonsense(successes, strict=strict) is not None:
             return 0
 
         if successes == self._number_of_trials:
@@ -145,7 +145,7 @@ class PoissonDistribution(Distribution):
         return f'Po({self._rate})'
 
     @staticmethod
-    def check_nonsense(number: int, *, strict: bool = True) -> Literal[None, -1]:
+    def _check_nonsense(number: int, *, strict: bool = True) -> Literal[None, -1]:
         """Check if the given number of event occurrences is nonsense.
 
         :param int number: The number of occurrences to check
@@ -184,7 +184,7 @@ class PoissonDistribution(Distribution):
         :raises NonsenseError: If the number of occurrences is negative
         :raises NonsenseError: If the number of occurrences is not an integer
         """
-        if self.check_nonsense(number, strict=strict) is not None:
+        if self._check_nonsense(number, strict=strict) is not None:
             return 0
 
         if number == 0:
@@ -207,7 +207,7 @@ class PoissonDistribution(Distribution):
         :raises NonsenseError: If the number of occurrences is negative
         :raises NonsenseError: If the number of occurrences is not an integer
         """
-        if self.check_nonsense(number, strict=strict) is not None:
+        if self._check_nonsense(number, strict=strict) is not None:
             return 0
 
         return sum(self.pmf(x) for x in range(number + 1))  # type: ignore[misc]

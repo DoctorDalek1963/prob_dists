@@ -20,7 +20,7 @@ class NonsenseError(Exception):
     """
 
 
-class Bounds:
+class _Bounds:
     """This is a simple little class to hold bounds for a :class:`Distribution` object."""
 
     lower: tuple[int | None, bool]
@@ -46,7 +46,7 @@ class Bounds:
     """
 
     def __init__(self):
-        """Create a :class:`Bounds` object with default bounds.
+        """Create a :class:`_Bounds` object with default bounds.
 
         These default bounds are ``(None, False)``, meaning everything up to but
         not including the natural bounds of the distribution. We don't include it,
@@ -65,9 +65,9 @@ class Bounds:
 
         This dunder method has been implemented purely to allow distributions to throw
         errors when users attempt to combine inequality and equality logic operators.
-        To check against that, though, we need to be able to check :class:`Bounds` equality.
+        To check against that, though, we need to be able to check :class:`_Bounds` equality.
         """
-        if not isinstance(other, Bounds):
+        if not isinstance(other, _Bounds):
             return NotImplemented
 
         return self.lower == other.lower and self.upper == other.upper
@@ -80,7 +80,7 @@ class Distribution(abc.ABC):
     it to be used easily in :func:`calculate_probability`.
     """
 
-    accepts_floats: bool
+    _accepts_floats: bool
     """This attribute is a flag for whether this distribution accepts floats, or only accepts ints.
 
     If it accepts floats, then it is continuous, if it doesn't, then it's discrete.
@@ -90,7 +90,7 @@ class Distribution(abc.ABC):
        ``NotImplemented`` if the user tries to compare a discrete distribution with a float.
     """
 
-    negate_probability: bool
+    _negate_probability: bool
     """This attribute is a flag set by :meth:`__ne__` and used by :meth:`calculate` for the ``!=`` operator."""
 
     def __init__(self, *, accepts_floats: bool):
@@ -98,14 +98,14 @@ class Distribution(abc.ABC):
 
         :param bool accepts_floats: Whether this distribution should accept floats
         """
-        self.bounds = Bounds()
-        self.accepts_floats = accepts_floats
-        self.negate_probability = False
+        self.bounds = _Bounds()
+        self._accepts_floats = accepts_floats
+        self._negate_probability = False
 
     def reset(self) -> None:
         """Reset the bounds of the distribution to be the default, and reset :attr:`negate_probability` flag."""
-        self.bounds = Bounds()
-        self.negate_probability = False
+        self.bounds = _Bounds()
+        self._negate_probability = False
 
     @abc.abstractmethod
     def __repr__(self) -> str:
@@ -120,11 +120,11 @@ class Distribution(abc.ABC):
 
         :raises NonsenseError: If the user has tried to mix inequality and equality comparison
         """
-        if not (isinstance(other, int) or (self.accepts_floats and isinstance(other, float))):
+        if not (isinstance(other, int) or (self._accepts_floats and isinstance(other, float))):
             return NotImplemented
 
         # If the bounds are already mutated, then we've mixed inequality and equality
-        if self.bounds != Bounds():
+        if self.bounds != _Bounds():
             raise NonsenseError('Cannot have inequality and equality mixed together')
 
         self.bounds.upper = (other, True)
@@ -138,22 +138,22 @@ class Distribution(abc.ABC):
 
         :raises NonsenseError: If the user has tried to mix inequality and equality comparison
         """
-        if not (isinstance(other, int) or (self.accepts_floats and isinstance(other, float))):
+        if not (isinstance(other, int) or (self._accepts_floats and isinstance(other, float))):
             return NotImplemented
 
         # If the bounds are already mutated, then we've mixed inequality and equality
-        if self.bounds != Bounds():
+        if self.bounds != _Bounds():
             raise NonsenseError('Cannot have inequality and equality mixed together')
 
         self.bounds.upper = (other, True)
         self.bounds.lower = (other, True)
 
-        self.negate_probability = True
+        self._negate_probability = True
         return self
 
     def __lt__(self, other):
         """Set the upper bound and don't include this value."""
-        if not (isinstance(other, int) or (self.accepts_floats and isinstance(other, float))):
+        if not (isinstance(other, int) or (self._accepts_floats and isinstance(other, float))):
             return NotImplemented
 
         if self.bounds.lower[0] is not None:
@@ -165,7 +165,7 @@ class Distribution(abc.ABC):
 
     def __le__(self, other):
         """Set the upper bound and include this value."""
-        if not (isinstance(other, int) or (self.accepts_floats and isinstance(other, float))):
+        if not (isinstance(other, int) or (self._accepts_floats and isinstance(other, float))):
             return NotImplemented
 
         if self.bounds.lower[0] is not None:
@@ -177,7 +177,7 @@ class Distribution(abc.ABC):
 
     def __gt__(self, other):
         """Set the lower bound and don't include this value."""
-        if not (isinstance(other, int) or (self.accepts_floats and isinstance(other, float))):
+        if not (isinstance(other, int) or (self._accepts_floats and isinstance(other, float))):
             return NotImplemented
 
         if self.bounds.upper[0] is not None:
@@ -189,7 +189,7 @@ class Distribution(abc.ABC):
 
     def __ge__(self, other):
         """Set the lower bound and include this value."""
-        if not (isinstance(other, int) or (self.accepts_floats and isinstance(other, float))):
+        if not (isinstance(other, int) or (self._accepts_floats and isinstance(other, float))):
             return NotImplemented
 
         if self.bounds.upper[0] is not None:
@@ -234,7 +234,7 @@ class Distribution(abc.ABC):
         if probability < 0:
             raise NonsenseError("This inequality doesn't make sense")
 
-        if self.negate_probability:
+        if self._negate_probability:
             probability = 1 - probability
 
         return round_sig_fig(probability, 10)
