@@ -121,14 +121,14 @@
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="probcalc.distribution_classes.Bounds">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">probcalc.distribution_classes.</span></span><span class="sig-name descname"><span class="pre">Bounds</span></span><a class="headerlink" href="#probcalc.distribution_classes.Bounds" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="probcalc.distribution_classes._Bounds">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">probcalc.distribution_classes.</span></span><span class="sig-name descname"><span class="pre">_Bounds</span></span><a class="headerlink" href="#probcalc.distribution_classes._Bounds" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>This is a simple little class to hold bounds for a <a class="reference internal" href="#probcalc.distribution_classes.Distribution" title="probcalc.distribution_classes.Distribution"><code class="xref py py-class docutils literal notranslate"><span class="pre">Distribution</span></code></a> object.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="probcalc.distribution_classes.Bounds.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#probcalc.distribution_classes.Bounds.__init__" title="Permalink to this definition"></a></dt>
-<dd><p>Create a <a class="reference internal" href="#probcalc.distribution_classes.Bounds" title="probcalc.distribution_classes.Bounds"><code class="xref py py-class docutils literal notranslate"><span class="pre">Bounds</span></code></a> object with default bounds.</p>
+<dt class="sig sig-object py" id="probcalc.distribution_classes._Bounds.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#probcalc.distribution_classes._Bounds.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Create a <a class="reference internal" href="#probcalc.distribution_classes._Bounds" title="probcalc.distribution_classes._Bounds"><code class="xref py py-class docutils literal notranslate"><span class="pre">_Bounds</span></code></a> object with default bounds.</p>
 <p>These default bounds are <code class="docutils literal notranslate"><span class="pre">(None,</span> <span class="pre">False)</span></code>, meaning everything up to but
 not including the natural bounds of the distribution. We don’t include it,
 because evaluating probability at something like infinity might not make
@@ -136,8 +136,8 @@ sense all the time.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="probcalc.distribution_classes.Bounds.lower">
-<span class="sig-name descname"><span class="pre">lower</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#probcalc.distribution_classes.Bounds.lower" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="probcalc.distribution_classes._Bounds.lower">
+<span class="sig-name descname"><span class="pre">lower</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#probcalc.distribution_classes._Bounds.lower" title="Permalink to this definition"></a></dt>
 <dd><p>The lower of the two bounds.</p>
 <p>The first element of the tuple is the value of the bound itself. None means the
 natural bound of the distribution. This can be 0, negative infinity, or something
@@ -147,8 +147,8 @@ in probability calculations or not.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="probcalc.distribution_classes.Bounds.upper">
-<span class="sig-name descname"><span class="pre">upper</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#probcalc.distribution_classes.Bounds.upper" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="probcalc.distribution_classes._Bounds.upper">
+<span class="sig-name descname"><span class="pre">upper</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#probcalc.distribution_classes._Bounds.upper" title="Permalink to this definition"></a></dt>
 <dd><p>The upper of the two bounds.</p>
 <p>The first element of the tuple is the value of the bound itself. None means the
 natural bound of the distribution. This can be the maximum number of trials,
@@ -158,18 +158,18 @@ in probability calculations or not.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="probcalc.distribution_classes.Bounds.__repr__">
-<span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#probcalc.distribution_classes.Bounds.__repr__" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="probcalc.distribution_classes._Bounds.__repr__">
+<span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#probcalc.distribution_classes._Bounds.__repr__" title="Permalink to this definition"></a></dt>
 <dd><p>Return a simple repr of the object, containing the value of the lower and upper bounds.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="probcalc.distribution_classes.Bounds.__eq__">
-<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#probcalc.distribution_classes.Bounds.__eq__" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="probcalc.distribution_classes._Bounds.__eq__">
+<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#probcalc.distribution_classes._Bounds.__eq__" title="Permalink to this definition"></a></dt>
 <dd><p>Check equality.</p>
 <p>This dunder method has been implemented purely to allow distributions to throw
 errors when users attempt to combine inequality and equality logic operators.
-To check against that, though, we need to be able to check <a class="reference internal" href="#probcalc.distribution_classes.Bounds" title="probcalc.distribution_classes.Bounds"><code class="xref py py-class docutils literal notranslate"><span class="pre">Bounds</span></code></a> equality.</p>
+To check against that, though, we need to be able to check <a class="reference internal" href="#probcalc.distribution_classes._Bounds" title="probcalc.distribution_classes._Bounds"><code class="xref py py-class docutils literal notranslate"><span class="pre">_Bounds</span></code></a> equality.</p>
 </dd></dl>
 
 </dd></dl>
@@ -193,8 +193,8 @@ it to be used easily in <code class="xref py py-func docutils literal notranslat
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="probcalc.distribution_classes.Distribution.accepts_floats">
-<span class="sig-name descname"><span class="pre">accepts_floats</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></em><a class="headerlink" href="#probcalc.distribution_classes.Distribution.accepts_floats" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="probcalc.distribution_classes.Distribution._accepts_floats">
+<span class="sig-name descname"><span class="pre">_accepts_floats</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></em><a class="headerlink" href="#probcalc.distribution_classes.Distribution._accepts_floats" title="Permalink to this definition"></a></dt>
 <dd><p>This attribute is a flag for whether this distribution accepts floats, or only accepts ints.</p>
 <p>If it accepts floats, then it is continuous, if it doesn’t, then it’s discrete.</p>
 <div class="admonition note">
@@ -205,15 +205,15 @@ it to be used easily in <code class="xref py py-func docutils literal notranslat
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="probcalc.distribution_classes.Distribution.negate_probability">
-<span class="sig-name descname"><span class="pre">negate_probability</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></em><a class="headerlink" href="#probcalc.distribution_classes.Distribution.negate_probability" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="probcalc.distribution_classes.Distribution._negate_probability">
+<span class="sig-name descname"><span class="pre">_negate_probability</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></em><a class="headerlink" href="#probcalc.distribution_classes.Distribution._negate_probability" title="Permalink to this definition"></a></dt>
 <dd><p>This attribute is a flag set by <a class="reference internal" href="#probcalc.distribution_classes.Distribution.__ne__" title="probcalc.distribution_classes.Distribution.__ne__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__ne__()</span></code></a> and used by <a class="reference internal" href="#probcalc.distribution_classes.Distribution.calculate" title="probcalc.distribution_classes.Distribution.calculate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">calculate()</span></code></a> for the <code class="docutils literal notranslate"><span class="pre">!=</span></code> operator.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="probcalc.distribution_classes.Distribution.reset">
 <span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#probcalc.distribution_classes.Distribution.reset" title="Permalink to this definition"></a></dt>
-<dd><p>Reset the bounds of the distribution to be the default, and reset <a class="reference internal" href="#probcalc.distribution_classes.Distribution.negate_probability" title="probcalc.distribution_classes.Distribution.negate_probability"><code class="xref py py-attr docutils literal notranslate"><span class="pre">negate_probability</span></code></a> flag.</p>
+<dd><p>Reset the bounds of the distribution to be the default, and reset <code class="xref py py-attr docutils literal notranslate"><span class="pre">negate_probability</span></code> flag.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -239,7 +239,7 @@ have, then we raise an error.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="probcalc.distribution_classes.Distribution.__ne__">
 <span class="sig-name descname"><span class="pre">__ne__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#probcalc.distribution_classes.Distribution.__ne__" title="Permalink to this definition"></a></dt>
-<dd><p>Set the upper and lower bounds to <code class="docutils literal notranslate"><span class="pre">other</span></code>, if possible, and set <a class="reference internal" href="#probcalc.distribution_classes.Distribution.negate_probability" title="probcalc.distribution_classes.Distribution.negate_probability"><code class="xref py py-attr docutils literal notranslate"><span class="pre">negate_probability</span></code></a>.</p>
+<dd><p>Set the upper and lower bounds to <code class="docutils literal notranslate"><span class="pre">other</span></code>, if possible, and set <code class="xref py py-attr docutils literal notranslate"><span class="pre">negate_probability</span></code>.</p>
 <p>See <a class="reference internal" href="#probcalc.distribution_classes.Distribution.__eq__" title="probcalc.distribution_classes.Distribution.__eq__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__eq__()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Raises</dt>
@@ -265,6 +265,11 @@ have, then we raise an error.</p>
 <span class="sig-name descname"><span class="pre">__gt__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#probcalc.distribution_classes.Distribution.__gt__" title="Permalink to this definition"></a></dt>
 <dd><p>Set the lower bound and don’t include this value.</p>
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="probcalc.distribution_classes.Distribution._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#probcalc.distribution_classes.Distribution._abc_impl" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="probcalc.distribution_classes.Distribution.__ge__">
@@ -415,8 +420,8 @@ result in undefined behaviour. Use this wrapper for all interactive use.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="probcalc.distributions.BinomialDistribution.check_nonsense">
-<span class="sig-name descname"><span class="pre">check_nonsense</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">successes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Literal[None,</span> <span class="pre">-1]</span></span></span><a class="headerlink" href="#probcalc.distributions.BinomialDistribution.check_nonsense" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="probcalc.distributions.BinomialDistribution._check_nonsense">
+<span class="sig-name descname"><span class="pre">_check_nonsense</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">successes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Literal[None,</span> <span class="pre">-1]</span></span></span><a class="headerlink" href="#probcalc.distributions.BinomialDistribution._check_nonsense" title="Permalink to this definition"></a></dt>
 <dd><p>Check if the given number of successes is nonsense.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -497,6 +502,11 @@ result in undefined behaviour. Use this wrapper for all interactive use.</p>
 <p>This method overrides <code class="xref py py-meth docutils literal notranslate"><span class="pre">Distribution.calculate()</span></code>. See that method for documentation.</p>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="probcalc.distributions.BinomialDistribution._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#probcalc.distributions.BinomialDistribution._abc_impl" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -517,8 +527,8 @@ result in undefined behaviour. Use this wrapper for all interactive use.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="probcalc.distributions.PoissonDistribution.check_nonsense">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_nonsense</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Literal[None,</span> <span class="pre">-1]</span></span></span><a class="headerlink" href="#probcalc.distributions.PoissonDistribution.check_nonsense" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="probcalc.distributions.PoissonDistribution._check_nonsense">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_check_nonsense</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Literal[None,</span> <span class="pre">-1]</span></span></span><a class="headerlink" href="#probcalc.distributions.PoissonDistribution._check_nonsense" title="Permalink to this definition"></a></dt>
 <dd><p>Check if the given number of event occurrences is nonsense.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -592,6 +602,11 @@ rate of the distribution.</p>
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="probcalc.distributions.PoissonDistribution._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#probcalc.distributions.PoissonDistribution._abc_impl" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -663,6 +678,11 @@ rate of the distribution.</p>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="probcalc.distributions.NormalDistribution._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#probcalc.distributions.NormalDistribution._abc_impl" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
