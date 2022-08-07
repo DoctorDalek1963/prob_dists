@@ -41,8 +41,11 @@ The full docs are available [here](https://doctordalek1963.github.io/probcalc).
 ## Changelog
 
 ### [Unreleased]
+
+### v0.3.2
 - Disallow keyword arguments when using `P()`
 - Make backend attributes and methods non-public
+- Use readthedocs.io for documentation
 
 ### v0.3.1
 - Improve performance of normal distribution CDF with stdlib
