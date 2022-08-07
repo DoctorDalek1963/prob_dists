@@ -19,11 +19,6 @@ Here's a simple example of the kind of things that this project lets you do:
 >>> P(10 <= X < 20)
 0.1965915424
 
-Here's a brief overview of the project structure, courtesy of `pylint`_:
-
-.. image:: int-imports.png
-   :alt: Internal import graph
-
 .. toctree::
    :maxdepth: 1
    :caption: Contents:
