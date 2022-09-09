@@ -36,11 +36,22 @@ And of course, you can use the normal distribution:
 
 This project will implement more distributions in the future, and they will all be able to be used like this.
 
+For ease of use, you can also set the desired number of significant figures in your answer:
+
+```python3
+>>> P(-1 < Z < 1)
+0.6826894723
+>>> P.set_sig_figs(4)
+>>> P(-1 < Z < 1)
+0.6827
+```
+
 The full docs are available [here](https://doctordalek1963.github.io/probcalc).
 
 ## Changelog
 
 ### [Unreleased]
+- Allow setting number of sig figs in result
 
 ### v0.3.2
 - Disallow keyword arguments when using `P()`

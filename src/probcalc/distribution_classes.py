@@ -237,7 +237,7 @@ class Distribution(abc.ABC):
         if self._negate_probability:
             probability = 1 - probability
 
-        return round_sig_fig(probability, 10)
+        return probability
 
     @abc.abstractmethod
     def pmf(self, value: int, *, strict: bool = True) -> float:
@@ -270,6 +270,20 @@ class Distribution(abc.ABC):
 
 class ProbabilityCalculator:
     """This class only exists to give the probability calculator a nice repr."""
+
+    def __init__(self) -> None:
+        """Create the object with a non-public ``_sig_figs`` attribute."""
+        self._sig_figs: int = 10
+
+    def set_sig_figs(self, x: int) -> None:
+        """Set the number of significant figures used in the result of calculations.
+
+        :raises ValueError: If ``x`` is not a positive integer
+        """
+        if not isinstance(x, int) or x <= 0:
+            raise ValueError('We can only have a postiive integer number of sig figs')
+
+        self._sig_figs = x
 
     def __repr__(self) -> str:
         """Return a very simple repr of the calculator."""
@@ -310,4 +324,4 @@ class ProbabilityCalculator:
         finally:
             distribution.reset()
 
-        return probability
+        return round_sig_fig(probability, self._sig_figs)
