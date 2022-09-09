@@ -51,6 +51,8 @@ The full docs are available [here](https://doctordalek1963.github.io/probcalc).
 ## Changelog
 
 ### [Unreleased]
+
+### v0.4.0
 - Allow setting number of sig figs in result
 
 ### v0.3.2

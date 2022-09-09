@@ -34,4 +34,4 @@ N = distributions.NormalDistribution
 
 __all__ = ['P', 'B', 'Po', 'N', 'NonsenseError', 'distributions', 'utility']
 
-__version__ = '0.3.2'
+__version__ = '0.4.0'
