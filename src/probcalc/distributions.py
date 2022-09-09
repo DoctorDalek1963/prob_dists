@@ -85,13 +85,11 @@ class BinomialDistribution(Distribution):
 
         # PMF taken from https://github.com/scipy/scipy/blob/main/scipy/stats/_discrete_distns.py#L67-L74
         magic_number = math.lgamma(self._number_of_trials + 1) - (
-                math.lgamma(successes + 1) +
-                math.lgamma(self._number_of_trials - successes + 1)
+            math.lgamma(successes + 1) + math.lgamma(self._number_of_trials - successes + 1)
         )
 
         return math.exp(
-            magic_number +
-            successes * math.log(self._probability) +
+            magic_number + successes * math.log(self._probability) +  # noqa: W504
             (self._number_of_trials - successes) * math.log1p(-self._probability)
         )
 
