@@ -52,6 +52,9 @@ The full docs are available [here](https://doctordalek1963.github.io/probcalc).
 
 ### [Unreleased]
 
+### v0.5.0
+- Add geometric distribution
+
 ### v0.4.0
 - Allow setting number of sig figs in result
 

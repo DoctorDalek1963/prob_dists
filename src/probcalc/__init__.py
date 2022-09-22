@@ -22,6 +22,8 @@ Here's a table of user-friendly aliases and the backend classes they refer to:
      - :class:`probcalc.distributions.PoissonDistribution`
    * - N
      - :class:`probcalc.distributions.NormalDistribution`
+   * - Geo
+     - :class:`probcalc.distributions.GeometricDistribution`
 """
 
 from . import distribution_classes, distributions, utility
@@ -31,7 +33,8 @@ P = distribution_classes.ProbabilityCalculator()
 B = distributions.BinomialDistribution
 Po = distributions.PoissonDistribution
 N = distributions.NormalDistribution
+Geo = distributions.GeometricDistribution
 
-__all__ = ['P', 'B', 'Po', 'N', 'NonsenseError', 'distributions', 'utility']
+__all__ = ['P', 'B', 'Po', 'N', 'Geo', 'NonsenseError', 'distributions', 'utility']
 
-__version__ = '0.4.0'
+__version__ = '0.5.0'

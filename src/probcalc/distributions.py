@@ -268,3 +268,84 @@ class NormalDistribution(Distribution):
         :returns float: The probability of getting less than or equal to this value
         """
         return 0.5 * (1 + math.erf((value - self._mean) / (self._std_dev * ROOT_TWO)))
+
+
+class GeometricDistribution(Distribution):
+    """This is a geometric distribution, used to model situations where you want to know about the first success."""
+
+    def __init__(self, probability: float) -> None:
+        """Construct a geometric distribution with the given probability of success."""
+        if not 0 <= probability <= 1:
+            raise NonsenseError(f'Geometric probability must be between 0 and 1, not {probability}')
+
+        super().__init__(accepts_floats=False)
+
+        self._probability = probability
+
+    def __repr__(self) -> str:
+        """Return a nice repr of the distribution."""
+        return f'Geo({self._probability})'
+
+    def _check_nonsense(self, trials: int, *, strict: bool) -> Literal[None, -1]:
+        """Check if the given number of trials is nonsense.
+
+        :param int trials: The number of trials to check
+        :param bool strict: Whether to throw errors or just return -1
+        :returns: None on success, -1 on fail
+        :rtype: Literal[None, -1]
+
+        :raises NonsenseError: If the number of trials is outside the valid range
+        :raises NonsenseError: If the number of trials is not an integer
+        """
+        if trials == 0:
+            if strict:
+                raise NonsenseError('Cannot ask probability of 0 trials')
+
+            return -1
+
+        if trials < 0:
+            if strict:
+                raise NonsenseError(f'Cannot have negative number of trials ({trials})')
+
+            return -1
+
+        if trials != int(trials):
+            if strict:
+                raise NonsenseError(f'Cannot ask probability of {trials} trials')
+
+            return -1
+
+        return None
+
+    def pmf(self, trial: int, *, strict: bool = True) -> float:
+        r"""Return the probability that the first success happens on the given trial.
+
+        This method uses the formula :math:`p(1 - p)^{x - 1}` where
+        :math:`x` is the number of the trial, and :math:`p` is the probability of success.
+
+        :param int trial: The number of trials to find the probability of
+        :param bool strict: Whether to throw errors for invalid input, or return 0
+        :returns float: The probability of getting the first success on this trial
+
+        :raises NonsenseError: If the number of successes is outside the valid range
+        :raises NonsenseError: If the number of successes is not an integer
+        """
+        if self._check_nonsense(trial, strict=strict) is not None:
+            return 0
+
+        return self._probability * (1 - self._probability) ** (trial - 1)
+
+    def cdf(self, trials: int, *, strict: bool = True) -> float:
+        """Return the probability that the first success occurs at or sooner than the given number of trials.
+
+        :param int trial: The number of trials to find the probability of
+        :param bool strict: Whether to throw errors for invalid input, or return 0
+        :returns float: The probability of getting the first success on this trial
+
+        :raises NonsenseError: If the number of successes is outside the valid range
+        :raises NonsenseError: If the number of successes is not an integer
+        """
+        if self._check_nonsense(trials, strict=strict) is not None:
+            return 0
+
+        return 1 - (1 - self._probability) ** trials
